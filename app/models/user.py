@@ -2,14 +2,24 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+project_members_join = db.Table(
+   'project_members',
+    db.Column("project_id", db.Integer, db.ForeignKey("projects.id"), primary_key=True),
+    db.Column("member_id", db.Integer, db.ForeignKey("users.id"), primary_key=True)
+    )
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
+    full_name = db.Column(db.String(100), nullable=False)
+    profile_image = db.Column(db.Text)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    projects = db.relationship("Project", backref='user_project', cascade="all, delete, delete-orphan")
+
+    project_participants = db.relationship('Project', secondary=project_members_join, lazy="subquery", backref=db.backref('project_members', lazy=True))
 
     @property
     def password(self):
@@ -25,6 +35,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'username': self.full_name,
+            'profile_image': self.profile_image,
+            'email': self.email,
+            'projects' : self.projects
         }
