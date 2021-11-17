@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 const Splash = () => {
 	const history = useHistory();
 	const [headerStyle, setHeaderStyle] = useState("splash-header-container");
+    
 	const changeHeaderStyle = (event) => {
 		if (window.scrollY > 3) {
 			setHeaderStyle("splash-header-container-scroll");
