@@ -11,9 +11,7 @@
 	src: url("../../font/Montserrat/Montserrat-ExtraLight.ttf") format("truetype");
 }
 .splash-main {
-	/* padding: 0 64px;
-    max-width: 1420px;
-    margin: 0 auto; */
+
 }
 .splash-header {
 	height: 100%;
@@ -22,18 +20,20 @@
 	max-width: 1420px;
 	padding: 0 64px;
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 .splash-header-container {
 	width: 100%;
 	height: 65px;
 	position: sticky;
 	top: 0;
+    z-index: 10;
 }
 .splash-header-container-scroll {
 	position: sticky;
 	top: 0;
 	width: 100%;
+    z-index: 10;
 	height: 56px;
 	background-color: white;
 	box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.2);
@@ -55,6 +55,7 @@
 		#eeebea 57.5vw,
 		#eeebea 100%
 	);
+    z-index: 2;
 }
 #splash-links-list {
 	margin: 0;
@@ -106,6 +107,9 @@
 	margin: 0 auto;
 	max-width: 1420px;
 	padding: 0 64px;
+    position: relative;
+    z-index: 3;
+    height: 80vh;
 }
 .splash-section-1-column-1 {
 	display: flex;
@@ -156,16 +160,84 @@
 	cursor: pointer;
 }
 .splash-section-1-column-2{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    flex-basis: 40%;
+    margin-left: 19%;
     position: relative;
-    margin-left: auto;
+}
+.splash-scenes{
+    position: relative;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
 }
 #splash-scene-one{
-    position: relative;
-    z-index: 0;
-    margin-top: auto;
+    position: absolute;
+    width: 80%;
+    bottom: 0px;
+    right: -55px;
+    top: 200px;
 }
+
 #splash-scene-two{
     position: absolute;
-    top:30px;
-    left:30px;
+    width: 80%;
+    top: 80px;
+    left: -150px;
+
+}
+.splash-section-1-images{
+    display: flex;
+}
+#splash-floating-span-1{
+    position: absolute;
+    background-color: white;
+    top: 100px;
+    left: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    transform: translateX(-5%);
+    animation-duration: 12s;
+    animation-delay: -1s;
+    animation-timing-function: ease;
+    animation-name: slide;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(-5%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(5%) rotate(.01deg);
+  }
+  100% {
+    transform: translateX(-5%) rotate(0deg);
+  }
+}
+#splash-floating-span-2{
+    position: absolute;
+    background-color: white;
+    top: 500px;
+    left: -100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    border-radius: 5px;
+    animation-delay: -2s;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    transform: translateX(-5%);
+    animation-duration: 12s;
+    animation-timing-function: ease;
+    animation-name: slide;
 }
