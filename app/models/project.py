@@ -14,7 +14,7 @@ class Project(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
     sections = db.relationship("Section", backref='section',cascade="all, delete, delete-orphan", lazy=True)
-
+    
 
     def to_dict(self):
         project_members = {}

@@ -33,10 +33,15 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        projects = {}
+        for project in self.projects:
+            projects[project.id] = {
+                'project_title': project.title,
+            }
         return {
             'id': self.id,
             'username': self.full_name,
             'profile_image': self.profile_image,
             'email': self.email,
-            'projects' : self.projects
+            'projects' : projects
         }

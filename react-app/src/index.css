@@ -1,1 +1,12 @@
 /* TODO Add site wide styles */
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('./font/Montserrat/Montserrat-Regular.ttf') format('truetype');
+}
+* {
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Montserrat-Regular', sans-serif;
+    margin: 0;
+}
