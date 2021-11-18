@@ -1,0 +1,46 @@
+.openboard-topbar{
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    min-height: 72px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 200;
+    background-color: white;
+}
+
+.topbar-expand-sidebar{
+    display: flex;
+    justify-content: center;
+    margin-right: 24px;
+    max-width: 43px;
+    transition: max-width,margin-right 250ms ease-out;
+    width: 16px;
+}
+.topbar-expand-sidebar-hidden{
+    display: flex;
+    justify-content: center;
+    transition: max-width,margin-right 250ms ease-out;
+    margin-right: 0;
+    max-width: 0;
+    overflow: hidden;
+}
+#topbar-toggle-button-div{
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 36px;
+    min-height: 36px;
+    min-width: 36px;
+    border-radius: 4px;
+    border:none;
+    width: 36px;
+    transition-duration: .5s;
+    transition-property: background-color;
+}
+
+#topbar-toggle-button-div:hover{
+    background-color: #F9F8F8;
+    cursor: pointer;
+}

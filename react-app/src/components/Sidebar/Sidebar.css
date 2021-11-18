@@ -9,7 +9,7 @@
     height: 100%;
 }
 .sidebar-closed{
-    margin-left: -200px;
+    margin-left: -240px;
     background-color: #292B2D;
     color: white;
     display: flex;
@@ -18,4 +18,22 @@
     transition: margin-left 250ms ease-out,transform 250ms ease-out;
     width: 240px;
     height: 100%;
+}
+.sidebar-header{
+    align-items: center;
+    display: flex;
+    height: 72px;
+    justify-content: space-between;
+}
+#sidebar-header-logo{
+    width: 150px;
+    padding-left: 24px;
+}
+#sidebar-toggle-button{
+    margin-right: 24px;
+    color: #A2A0A2;
+}
+#sidebar-toggle-button:hover{
+    color:white;
+    cursor: pointer;
 }

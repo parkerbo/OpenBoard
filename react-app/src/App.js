@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import Sidebar from "./components/Sidebar/Sidebar";
+import SideBar from "./components/SideBar/SideBar";
 import Splash from "./components/Splash/Splash";
 import { authenticate } from "./store/session";
 import RootPage from "./components/RootPage";
@@ -52,11 +52,11 @@ console.log(showSidebar)
 				<Route path="/" exact={true}>
 					{!sessionUser && <Splash />}
 					{sessionUser && (
-						 <div className="openboard-main-layer">
-						 <Sidebar show={showSidebar} toggle={toggleSidebar} />
-						 <RootPage />
-						 </div>
-						 )}
+						<div className="openboard-main-layer">
+							<SideBar show={showSidebar} toggle={toggleSidebar} />
+							<RootPage show={showSidebar} toggle={toggleSidebar} />
+						</div>
+					)}
 				</Route>
 				<Route path="/login" exact={true}>
 					<LoginForm />
