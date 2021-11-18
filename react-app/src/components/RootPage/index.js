@@ -1,11 +1,13 @@
 import TopBar from "../TopBar";
 import { Route } from "react-router-dom";
-
-const RootPage = ({show, toggle}) => {
+import HomePage from "../HomePage";
+import "./RootPage.css"
+const RootPage = ({show, toggle, page}) => {
 	return (
-		<div className="openboard-root-page">
+		<div className={`openboard-root-page ${page==='home'?'root-home-page-background':null}`}>
 			<Route path="/" exact={true}>
-				<TopBar show={show} toggle={toggle} />
+				<TopBar show={show} toggle={toggle} page={page}/>
+                <HomePage />
 			</Route>
 		</div>
 	);

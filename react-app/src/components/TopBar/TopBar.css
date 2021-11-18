@@ -5,8 +5,11 @@
     flex-shrink: 0;
     min-height: 72px;
     padding: 0 24px;
-    position: relative;
+    position: sticky;
+	top: 0;
     z-index: 200;
+}
+.openboard-topbar-home-scroll{
     background-color: white;
 }
 
@@ -43,4 +46,8 @@
 #topbar-toggle-button-div:hover{
     background-color: #f5f1f1;
     cursor: pointer;
+}
+#top-bar-title{
+    color: white;
+    font-size: 24px;
 }

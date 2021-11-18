@@ -13,7 +13,7 @@ body{
     margin: 0;
 }
 .openboard-main-layer{
-  bottom: 0;
+    bottom: 0;
     display: flex;
     left: 0;
     overflow: hidden;
@@ -28,6 +28,7 @@ body{
     flex: 1;
     flex-direction: column;
     min-width: 920px;
+    overflow: scroll;
     position: relative;
     background-color: gray;
 }

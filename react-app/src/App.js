@@ -53,14 +53,14 @@ function App() {
 					{sessionUser && (
 						<div className="openboard-main-layer">
 							<SideBar show={showSidebar} toggle={toggleSidebar} />
-							<RootPage show={showSidebar} toggle={toggleSidebar} />
+							<RootPage show={showSidebar} toggle={toggleSidebar} page="home"/>
 						</div>
 					)}
 				</Route>
 				<ProtectedRoute path="/projects/:projectId">
 					<div className="openboard-main-layer">
 						<SideBar show={showSidebar} toggle={toggleSidebar} />
-						<RootPage show={showSidebar} toggle={toggleSidebar} />
+						<RootPage show={showSidebar} toggle={toggleSidebar} page="single-project" />
 					</div>
 				</ProtectedRoute>
 				<Route path="/login" exact={true}>

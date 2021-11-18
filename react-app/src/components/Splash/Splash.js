@@ -20,6 +20,9 @@ const Splash = () => {
 
 	useEffect(() => {
 		window.addEventListener("scroll", changeHeaderStyle);
+		return () => {
+			window.removeEventListener("scroll", changeHeaderStyle);
+		};
 	}, []);
 
 	return (
