@@ -1,0 +1,21 @@
+.sidebar-open{
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    background-color: #292B2D;
+    color: white;
+    transition: margin-left 250ms ease-out,transform 250ms ease-out;
+    width: 240px;
+    height: 100%;
+}
+.sidebar-closed{
+    margin-left: -200px;
+    background-color: #292B2D;
+    color: white;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    transition: margin-left 250ms ease-out,transform 250ms ease-out;
+    width: 240px;
+    height: 100%;
+}

@@ -1,11 +1,13 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
-
-const NavBar = () => {
+import LogoutButton from '../auth/LogoutButton';
+import "./Sidebar.css"
+const Sidebar = ({show, toggle}) => {
+  const sidebarClass = show ? 'sidebar-open': 'sidebar-closed';
   return (
-    <nav>
+    <nav className={sidebarClass}>
+      <button onClick={toggle}>Toggle</button>
       <ul>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
@@ -35,4 +37,4 @@ const NavBar = () => {
   );
 }
 
-export default NavBar;
+export default Sidebar;

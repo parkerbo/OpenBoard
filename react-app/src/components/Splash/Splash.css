@@ -115,13 +115,13 @@
 	display: flex;
 	max-width: 560px;
 	margin: 0;
-	padding-top: 80px;
+	padding-top: 110px;
 	font-family: "Montserrat-Light";
 	font-size: 23px;
 	flex-direction: column;
 }
 .splash-section-1-column-1 h1 {
-	padding-bottom: 60px;
+	padding-bottom: 120px;
 }
 .splash-section-1-column-1 h4 {
 	border-top: 1px solid black;
@@ -130,6 +130,7 @@
 	padding-top: 30px;
 	font-size: 19px;
 	font-weight: 900;
+    padding-bottom: 20px;
 	line-height: 1.8rem;
 	word-spacing: 0.1rem;
 }
