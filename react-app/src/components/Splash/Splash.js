@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 const Splash = () => {
 	const history = useHistory();
 	const [headerStyle, setHeaderStyle] = useState("splash-header-container");
-    
+
 	const changeHeaderStyle = (event) => {
 		if (window.scrollY > 3) {
 			setHeaderStyle("splash-header-container-scroll");
@@ -20,6 +20,9 @@ const Splash = () => {
 
 	useEffect(() => {
 		window.addEventListener("scroll", changeHeaderStyle);
+		return () => {
+			window.removeEventListener("scroll", changeHeaderStyle);
+		};
 	}, []);
 
 	return (
@@ -61,10 +64,10 @@ const Splash = () => {
 					<div class="splash-section-1-column-2">
 						<div class="splash-scenes">
 							<div id="splash-scene-one">
-								<img src={sceneOne} width="100%" />
+								<img src={sceneOne} width="100%" alt="OpenBoard-SceneOne" />
 							</div>
 							<div id="splash-scene-two">
-								<img src={sceneTwo} width="100%" />
+								<img src={sceneTwo} width="100%" alt="OpenBoard-SceneTwo" />
 							</div>
 						</div>
 						<span id="splash-floating-span-1">

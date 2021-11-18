@@ -1,0 +1,86 @@
+@font-face {
+	font-family: "Montserrat-Medium";
+	src: url("../../font/Montserrat/Montserrat-Medium.ttf") format("truetype");
+}
+.signup-main-div{
+    background-color: #F5F8F9;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+.signup-panel-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 440px;
+    width: calc(100% - 16px);
+    border-radius: 8px;
+    padding: 24px 48px 48px;
+    max-height: 600px;
+    margin-top: 80px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+}
+
+#signup-logo{
+    width: 200px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+#signup-logo img{
+    width: 100%;
+}
+#signup-label{
+    font-size: 12px;
+    color: #6E7782;
+    margin-bottom: 10px;
+    font-family: "Montserrat-Medium";
+}
+
+.signup-panel-div input{
+    height: 36px;
+    padding: 6px 12px;
+    margin-top: 1px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #cbd4db;
+}
+.signup-panel-div form{
+    width: 100%;
+    border-top: 1px solid #cbd4db;
+}
+ .signup-errors{
+     background-color: #FFEDEF;
+     color: #FF5262;
+     margin-bottom: 20px;
+     margin-top: 10px;
+     font-size: 14px;
+ }
+#signup-button{
+    width: 100%;
+    margin-top: 30px;
+    font-size: 14px;
+    color: white;
+    background-color: #796EFF;
+    border-radius: 5px;
+    border:none;
+    height: 36px;
+}
+#signup-button:hover{
+    background-color: #635ac7;
+    cursor: pointer;
+}
+#signup-yes-account{
+    font-size: 15px;
+    margin-top: 20px;
+    color: #6E7782;
+    font-family: "Montserrat-Medium";
+}
+
+#signup-yes-account a{
+    text-decoration: none;
+    color: #17A9F5
+}

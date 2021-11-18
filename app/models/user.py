@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(100), nullable=False)
     profile_image = db.Column(db.Text)
+    notepad = db.Column(db.Text)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
@@ -34,14 +35,17 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         projects = {}
-        for project in self.projects:
+        for project in self.user_projects:
             projects[project.id] = {
+                'project_id': project.id,
                 'project_title': project.title,
+                'project_color': project.color
             }
         return {
             'id': self.id,
-            'username': self.full_name,
+            'fullname': self.full_name,
             'profile_image': self.profile_image,
+            'notepad': self.notepad,
             'email': self.email,
             'projects' : projects
         }

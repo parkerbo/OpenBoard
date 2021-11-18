@@ -1,0 +1,5 @@
+.root-home-page-background{
+    background-size: cover;
+    background-image: url('../../images/OpenBoard-BlueBackground.png');
+    transition: background-image 200ms ease-in-out;
+}

@@ -5,8 +5,30 @@
 }
 * {
     box-sizing: border-box;
+    padding:0;
+    margin:0;
 }
 body{
     font-family: 'Montserrat-Regular', sans-serif;
     margin: 0;
+}
+.openboard-main-layer{
+    bottom: 0;
+    display: flex;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+}
+
+.openboard-root-page{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 920px;
+    overflow: scroll;
+    position: relative;
+    background-color: gray;
 }

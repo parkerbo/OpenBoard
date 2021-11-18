@@ -1,5 +1,5 @@
 from .db import db
-
+from .user import project_members_join
 
 class Project(db.Model):
     __tablename__ = 'projects'
@@ -8,13 +8,15 @@ class Project(db.Model):
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    color = db.Column(db.String(100), nullable=False, default='blue')
+    color = db.Column(db.String(100), nullable=False, default='#F06A6A')
     icon = db.Column(db.String(255), nullable=False, default= 'fa-project-diagram')
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
     sections = db.relationship("Section", backref='section',cascade="all, delete, delete-orphan", lazy=True)
-    
+
+    user_projects = db.relationship('User', secondary=project_members_join, lazy="subquery", backref=db.backref('user_projects', lazy=True))
+
 
     def to_dict(self):
         project_members = {}
