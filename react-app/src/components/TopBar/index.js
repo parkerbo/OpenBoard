@@ -8,7 +8,7 @@ const TopBar = ({show, toggle, page}) => {
 			: "topbar-expand-sidebar";
     const [headerStyle, setHeaderStyle] = useState("openboard-topbar-home");
     const changeTopBarStyle = (event) => {
-			if (window.scrollY > 0) {
+			if (window.scrollY === 0) {
                 console.log('here')
 				setHeaderStyle("openboard-topbar-home-scroll");
 			} else {

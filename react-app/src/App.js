@@ -38,6 +38,7 @@ function App() {
 		})();
 	}, [dispatch]);
 
+
 	if (!loaded) {
 		return (
 			<div>
