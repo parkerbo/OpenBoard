@@ -12,7 +12,6 @@ const Splash = () => {
 
 	const changeHeaderStyle = (event) => {
 		if (window.scrollY > 3) {
-			console.log("work")
 			setHeaderStyle("splash-header-container-scroll");
 		} else {
 			setHeaderStyle("splash-header-container");
