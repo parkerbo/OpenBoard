@@ -1,4 +1,5 @@
 import "./TopBar.css"
+import {MdMenu} from 'react-icons/md'
 
 const TopBar = ({show, toggle}) => {
     const toggleButtonClassName = show
@@ -8,7 +9,7 @@ const TopBar = ({show, toggle}) => {
 			<div className="openboard-topbar">
 				<div className={toggleButtonClassName}>
 					<div id="topbar-toggle-button-div" onClick={toggle}>
-						<i className="fas fa-bars" ></i>
+						<MdMenu size="1.5em"/>
 					</div>
 				</div>
 				<h1>Top Bar</h1>

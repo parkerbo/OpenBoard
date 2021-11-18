@@ -45,7 +45,6 @@ function App() {
 			</div>
 		)
 	}
-console.log(showSidebar)
 	return (
 		<BrowserRouter>
 			<Switch>
@@ -58,6 +57,12 @@ console.log(showSidebar)
 						</div>
 					)}
 				</Route>
+				<ProtectedRoute path="/projects/:projectId">
+					<div className="openboard-main-layer">
+						<SideBar show={showSidebar} toggle={toggleSidebar} />
+						<RootPage show={showSidebar} toggle={toggleSidebar} />
+					</div>
+				</ProtectedRoute>
 				<Route path="/login" exact={true}>
 					<LoginForm />
 				</Route>
