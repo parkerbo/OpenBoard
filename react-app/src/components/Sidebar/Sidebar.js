@@ -13,6 +13,7 @@ const SideBar = ({ show, toggle }) => {
 	const user_projects = user.projects;
 	const sidebarClass = show ? "sidebar-open" : "sidebar-closed";
 
+  
 	return (
 		<nav className={sidebarClass}>
 			<div className="sidebar-header">
