@@ -26,6 +26,8 @@ class Project(db.Model):
                 'member_name': member.full_name
             }
         sections = {section.id:section.to_dict() for section in self.project_sections}
+        section_board_columns = {section.id:section.board_column for section in self.project_sections}
+        sections_order = sorted(section_board_columns.items(), key=lambda x: x[1])
         return {
             'id': self.id,
             'title': self.title,
@@ -33,6 +35,7 @@ class Project(db.Model):
             'owner_id': self.owner_id,
             'project_members': project_members,
             'sections': sections,
+            'sections_order': sections_order,
             'color' : self.color,
             'icon' : self.icon,
             'created_at' : self.created_at,

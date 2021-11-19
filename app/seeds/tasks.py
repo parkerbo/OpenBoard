@@ -36,11 +36,35 @@ def seed_tasks():
         end_date=today,
         created_at=today,
         updated_at=today)
+    task4 = Task(
+        title='Upgrade PostgreSQL database',
+        description='We made changes to the data structure so update the database to reflect new column additon proposal',
+        owner_id=2,
+        assignee_id=1,
+        section_id=3,
+        status="On Track",
+        priority="Medium",
+        end_date=today,
+        created_at=today,
+        updated_at=today)
+    task5 = Task(
+        title='Debug event listener not firing',
+        description='On scroll event listener is not firing to change header background color',
+        owner_id=1,
+        assignee_id=2,
+        section_id=3,
+        status="On Track",
+        priority="Medium",
+        end_date=today,
+        created_at=today,
+        updated_at=today)
 
 
     db.session.add(task1)
     db.session.add(task2)
     db.session.add(task3)
+    db.session.add(task4)
+    db.session.add(task5)
 
     comment1 = Comment(
         user_id=1,
