@@ -1,0 +1,10 @@
+.task-card{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 0 1px #edeae9;
+    border-radius: 10px;
+    min-height: 100px;
+    margin: 10px;
+    width: 100%;
+}

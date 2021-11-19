@@ -3,6 +3,7 @@ import { Route, useParams } from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux";
 import { useEffect, useState } from "react";
 import { getProject } from "../../store/project";
+import ProjectPage from "../ProjectPage";
 import HomePage from "../HomePage";
 import "./RootPage.css"
 const RootPage = ({show, toggle, page}) => {
@@ -34,7 +35,8 @@ const RootPage = ({show, toggle, page}) => {
 			</Route>
 			<Route path="/projects/:projectId">
 				<TopBar show={show} toggle={toggle} page={page} title={project}/>
-			</Route>
+                <ProjectPage />
+            </Route>
 		</div>
 	);
 };

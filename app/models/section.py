@@ -7,6 +7,7 @@ class Section(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'), nullable=False)
     board_column = db.Column(db.Integer, nullable=False, default=0)
+    tasks_order = db.Column(db.ARRAY(db.Integer), nullable=False, default=[])
     title = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -20,6 +21,7 @@ class Section(db.Model):
             'id': self.id,
             'project_id': self.project_id,
             'board_column': self.board_column,
+            'tasks_order': self.tasks_order,
             'title': self.title,
             'tasks': tasks,
             'created_at' : self.created_at,
