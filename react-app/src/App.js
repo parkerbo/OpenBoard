@@ -5,6 +5,7 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import SideBar from "./components/SideBar/SideBar";
+import LoadingScreen from "./components/LoadingScreen";
 import Splash from "./components/Splash/Splash";
 import { authenticate } from "./store/session";
 import RootPage from "./components/RootPage";
@@ -34,7 +35,10 @@ function App() {
 					setShowSidebar(true);
 				}
 			}
-			setLoaded(true);
+
+				setLoaded(true);
+
+
 		})();
 	}, [dispatch]);
 
@@ -42,7 +46,7 @@ function App() {
 	if (!loaded) {
 		return (
 			<div>
-				Loading...
+				<LoadingScreen />
 			</div>
 		)
 	}

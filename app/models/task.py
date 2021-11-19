@@ -18,12 +18,12 @@ class Task(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
-
+    tasks = db.relationship("Section", backref='section_tasks', cascade="all, delete", lazy=True)
 
     def to_dict(self):
         comments = {}
         for comment in self.task_comments:
-            comment[comment.id] = {
+            comments[comment.id] = {
                 'comment_id' : comment.id,
                 'user_id' : comment.user_id,
                 'comment' : comment.comment,
