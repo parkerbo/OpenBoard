@@ -11,6 +11,17 @@ class Section(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
-    tasks = db.relationship("Task", backref='task_section', cascade="all, delete", lazy=True)
+    projects = db.relationship("Project", backref='project_sections', cascade="all, delete", lazy=True)
+    section_tasks_rel = db.relationship("Task", backref='task_section', cascade="all, delete", lazy=True)
 
-
+    def to_dict(self):
+        tasks = {task.id:task.to_dict() for task in self.section_tasks}
+        return{
+            'id': self.id,
+            'project_id': self.project_id,
+            'board_column': self.board_column,
+            'title': self.title,
+            'tasks': tasks,
+            'created_at' : self.created_at,
+            'updated_at' : self.updated_at
+        }

@@ -25,13 +25,14 @@ class Project(db.Model):
                 'member_id' : member.id,
                 'member_name': member.full_name
             }
+        sections = {section.id:section.to_dict() for section in self.project_sections}
         return {
             'id': self.id,
             'title': self.title,
             'description': self.description,
             'owner_id': self.owner_id,
             'project_members': project_members,
-            'sections': self.sections,
+            'sections': sections,
             'color' : self.color,
             'icon' : self.icon,
             'created_at' : self.created_at,

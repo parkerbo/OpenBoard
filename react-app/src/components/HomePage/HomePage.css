@@ -4,7 +4,6 @@
     flex-direction: column;
     padding: 0 32px;
     width: 100%;
-    height: 1220vh;
 }
 .homepage-content{
     align-items: stretch;
@@ -56,9 +55,50 @@
     box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
     border:none;
 }
+.homepage-notepad-widget{
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    overflow: hidden;
+}
+#homepage-notepad-widget-title{
+    font-size: 20px;
+    line-height: 28px;
+    flex-shrink: 0;
+    margin: 24px;
+}
+#homepage-notepad-widget-title svg {
+	vertical-align:text-bottom;
+	margin-left: 8px;
+    margin-bottom: 3px;
+}
 .homepage-widget-full{
     width: 100%;
     padding: 10px;
     height: 400px;
     flex: 0 0 auto;
+}
+.homepage-notepad-widget-content{
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column nowrap;
+    margin: 0 24px;
+    overflow: hidden;
+}
+.homepage-notepad-widget-status{
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: flex-end;
+    justify-self: end;
+    margin: 16px 24px;
+}
+.homepage-notepad-widget-content > textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding: 5px;
+    height: 100%;
 }

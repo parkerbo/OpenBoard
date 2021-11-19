@@ -51,3 +51,19 @@
     color: white;
     font-size: 24px;
 }
+#top-bar-title-project{
+    color: black;
+    font-size: 24px;
+}
+.openboard-topbar-project{
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    background-color: white;
+    flex-shrink: 0;
+    min-height: 72px;
+    padding: 0 24px;
+    position: sticky;
+	top: 0;
+    z-index: 200;
+}

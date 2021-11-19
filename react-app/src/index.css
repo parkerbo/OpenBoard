@@ -13,22 +13,16 @@ body{
     margin: 0;
 }
 .openboard-main-layer{
-    bottom: 0;
-    z-index: -1;
     display: flex;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 .openboard-root-page{
     display: flex;
     flex: 1;
+    height: 100%;
     flex-direction: column;
     min-width: 920px;
     overflow: scroll;
-    position: relative;
     background-color: gray;
 }
