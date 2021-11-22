@@ -22,3 +22,7 @@
     min-width: 1px;
     overflow-x: auto;
 }
+.projectpage-board-body-details-open{
+    min-width: calc(100% - 700px);
+    width: 45%;
+}

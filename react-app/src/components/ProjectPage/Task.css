@@ -1,28 +1,95 @@
-.task-card{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    border:none;
-    box-shadow: 0 0 0 1px #edeae9;
-    border-radius: 10px;
-    min-height: 100px;
-    margin: 5px 0px 5px 0px;
-    width: 256px;
+.task-card {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	border: none;
+	box-shadow: 0 0 0 1px #edeae9;
+	border-radius: 10px;
+	min-height: 100px;
+	margin: 5px 0px 5px 0px;
+	width: 100%;
+	cursor: pointer;
+}
+.task-card:hover {
+	box-shadow: 0 0 0 1px #6d6e6f;
 }
 
-.task-dragging{
-    border: 1px solid #4573D1;
+.task-dragging {
+	border: 1px solid #4573d1;
+}
+.task-drag-null {
+	cursor: pointer !important;
 }
 
-.task-card h3{
-    font-family: "Monserrat-Light";
-    margin: 12px 16px;
-    font-size: 16px;
-    line-height: 22px;
+.task-card h3 {
+	font-family: "Montserrat-Regular";
+	margin: 12px 16px;
+	font-size: 14px;
+	line-height: 22px;
+	padding-left: 7px;
+	margin: 0;
 }
-.task-card h4{
-    font-family: "Monserrat-Light";
-    margin: 12px 16px;
-    font-size: 12px;
-    line-height: 22px;
+.task-card h4 {
+	font-family: "Montserrat-Regular";
+	margin: 12px 16px;
+	font-size: 12px;
+	line-height: 22px;
+}
+.task-card-title {
+	display: flex;
+	margin: 15px 10px 0px 10px;
+}
+#task-card-check-mark {
+	color: #6d6e6f;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-height: 22px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+#task-card-check-mark:hover {
+	color: #5ca283;
+}
+.task-card-indicators {
+	display: flex;
+	margin: 10px 10px;
+}
+.task-card-indicator {
+	border-radius: 10px;
+	display: block;
+	font-size: 12px;
+	font-weight: 400;
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+    margin-right: 5px;
+	padding: 0 8px;
+	text-align: left;
+	white-space: nowrap;
+}
+#priority-Medium{
+    background-color: #f1bd6c;
+    color:black;
+}
+#priority-Low{
+    background-color: #9ee7e3;
+    color: black;
+}
+#priority-High {
+	background-color: #b36bd4;
+	color: white;
+}
+.status-At{
+    background-color: #f8df72;
+    color:black;
+}
+.status-Off{
+    background-color: #f06a6a;
+    color: black;
+}
+.status-On{
+    background-color: #4ecbc4;
+    color: black;
 }

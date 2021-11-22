@@ -2,22 +2,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Section from "./Section";
+import TaskDetail from "./TaskDetail";
 import { getProject } from "../../store/project";
+import { useTaskDetail } from "../../context/TaskDetailContext";
 import { updateSection } from "../../store/project";
 import { DragDropContext } from "react-beautiful-dnd";
 import "./ProjectPage.css";
 const ProjectPage = () => {
-    const {projectId} = useParams();
+	const { projectId } = useParams();
+	const { showTaskDetail, currentTask } = useTaskDetail();
 	const dispatch = useDispatch();
 	const project = useSelector((state) => state.project);
-    const [currentProject, setCurrentProject] = useState(project);
+	const [currentProject, setCurrentProject] = useState(project);
 	const sections_order = currentProject.sections_order;
 	const [sections, setSections] = useState(currentProject.sections);
-   useEffect(() => {
-       if(project){
-        setCurrentProject(project)
-       }
-   }, [project, projectId])
+	useEffect(() => {
+		if (project) {
+			setCurrentProject(project);
+		}
+	}, [project, projectId]);
 	const onDragEnd = async (result) => {
 		const { destination, source, draggableId } = result;
 		if (!destination) {
@@ -30,7 +33,7 @@ const ProjectPage = () => {
 			return;
 		}
 
-        const start = sections[source.droppableId];
+		const start = sections[source.droppableId];
 		const end = sections[destination.droppableId];
 		if (start === end) {
 			const section = sections[source.droppableId];
@@ -49,45 +52,46 @@ const ProjectPage = () => {
 			};
 			setSections(newSectionsState);
 			await dispatch(updateSection(newSectionId, newSection));
-            return;
+			return;
 		}
-            console.log(source.index)
-            const start_tasks_order = Array.from(start.tasks_order);
-            start_tasks_order.splice(source.index,1);
-            const newStartSection = {
-                ...start,
-                tasks_order: start_tasks_order
-            }
-            const droppedTaskId = parseInt(draggableId);
-           const droppedTask = newStartSection.tasks[droppedTaskId];
-           delete newStartSection.tasks[(source.index + 1)]
-            const end_tasks_order = Array.from(end.tasks_order);
-            end_tasks_order.splice(destination.index, 0, parseInt(draggableId));
-            const newEndSection = {
-                ...end,
-                tasks_order: end_tasks_order
-            }
-            newEndSection.tasks[droppedTask.id] = droppedTask;
+		console.log(source.index);
+		const start_tasks_order = Array.from(start.tasks_order);
+		start_tasks_order.splice(source.index, 1);
+		const newStartSection = {
+			...start,
+			tasks_order: start_tasks_order,
+		};
+		const droppedTaskId = parseInt(draggableId);
+		const droppedTask = newStartSection.tasks[droppedTaskId];
+		delete newStartSection.tasks[droppedTaskId];
+		const end_tasks_order = Array.from(end.tasks_order);
+		end_tasks_order.splice(destination.index, 0, parseInt(draggableId));
+		const newEndSection = {
+			...end,
+			tasks_order: end_tasks_order,
+		};
+		newEndSection.tasks[droppedTask.id] = droppedTask;
 
-            const newStartSectionId = newStartSection.id;
-            const newEndSectionId = newEndSection.id;
-            sections[newStartSectionId] = newStartSection;
-            sections[newEndSectionId] = newEndSection;
-            const newSectionsState = {
-                ...sections,
-            };
-            console.log(newSectionsState)
-            setSections(newSectionsState);
-            await dispatch(updateSection(newStartSectionId, newStartSection));
-            await dispatch(updateSection(newEndSectionId, newEndSection, droppedTaskId));
-            return;
-
+		const newStartSectionId = newStartSection.id;
+		const newEndSectionId = newEndSection.id;
+		sections[newStartSectionId] = newStartSection;
+		sections[newEndSectionId] = newEndSection;
+		const newSectionsState = {
+			...sections,
+		};
+		console.log(newSectionsState);
+		setSections(newSectionsState);
+		await dispatch(updateSection(newStartSectionId, newStartSection));
+		await dispatch(
+			updateSection(newEndSectionId, newEndSection, droppedTaskId)
+		);
+		return;
 	};
 
 	return (
 		<div className="projectpage-main">
 			<div className="projectpage-board">
-				<div className="projectpage-board-body">
+				<div className={`projectpage-board-body`}>
 					<DragDropContext onDragEnd={onDragEnd}>
 						{sections_order.map((sectionId) => {
 							const section = sections[sectionId[0]];
@@ -100,8 +104,11 @@ const ProjectPage = () => {
 							);
 						})}
 					</DragDropContext>
+
 				</div>
+<TaskDetail show={showTaskDetail} task={currentTask} />
 			</div>
+
 		</div>
 	);
 };

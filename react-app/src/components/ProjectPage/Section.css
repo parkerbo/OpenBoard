@@ -6,7 +6,6 @@
     transition: box-shadow 250ms;
     height: 100%;
     max-width: 304px;
-    padding: 0 12px;
     position: relative;
     flex: 0 0 304px;
     width: 304px;
@@ -24,6 +23,8 @@
 .board-section-title h3{
     padding: 10px;
     font-size: 16px;
+    font-family: "Montserrat-Bold";
+    font-weight: 900;
     line-height: 20px;
     color:black;
     margin-right: auto;
@@ -41,4 +42,10 @@
     padding: 2px 12px 0;
     min-height: 1px;
     overflow-y: auto;
+}
+#board-section-title-options{
+    margin-right: 15px;
+}
+#board-section-title-add-task{
+    margin-right: 12px;
 }

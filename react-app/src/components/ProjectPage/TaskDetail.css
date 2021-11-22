@@ -1,0 +1,25 @@
+.task-detail-overlay{
+    background-color: grey;
+    border-top: 1px solid #edeae9;
+    bottom: 0;
+    box-shadow: 0 0 0 1px #edeae9, 0 5px 20px 0 rgba(109, 110, 111, 0.08);;
+    display: flex;
+    flex-direction: column;
+    left: 100%;
+    max-width: 700px;
+    position: absolute;
+    top: 0;
+    transition: transform .2s ease-in;
+    width: 55%;
+    z-index: 7;
+}
+.task-detail-overlay-open{
+        transform: translateX(-100%);
+    transition: transform .5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.task-detail-inner-content{
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 1px;
+}

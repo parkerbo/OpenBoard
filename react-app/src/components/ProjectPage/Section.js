@@ -9,8 +9,8 @@ const Section = ({ section, tasks }) => {
 		<div className="board-section">
 			<div className="board-section-title">
 				<h3>{section.title}</h3>
-                <FaPlus />
-                <FaEllipsisH />
+                <FaPlus id="board-section-title-add-task"/>
+                <FaEllipsisH id="board-section-title-options"/>
 			</div>
 			<Droppable droppableId={section.id.toString()}>
 				{provided => (
