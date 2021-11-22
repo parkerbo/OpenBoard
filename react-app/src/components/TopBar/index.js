@@ -9,9 +9,14 @@ const TopBar = ({ show, toggle, page, project }) => {
     const dispatch = useDispatch();
     const didMount = useRef(false);
 	const [showProjectDetails, setShowProjectDetails] = useState(false);
-    const [projectTitle, setProjectTitle] = useState(project.title);
+    const [projectTitle, setProjectTitle] = useState("");
     const [saveState, setSaveState] = useState("");
-    const [projectDescription, setProjectDescription] = useState(project.description);
+    const [projectDescription, setProjectDescription] = useState("");
+    useEffect(() => {if (project) {
+        setProjectTitle(project.title)
+        setProjectDescription(project.description)
+    }}, [])
+
     const [showProjectDetailsModal, setShowProjectDetailsModal] = useState(false);
 	const toggleButtonClassName = show
 		? "topbar-expand-sidebar-hidden"
