@@ -2,9 +2,27 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+    border:none;
     box-shadow: 0 0 0 1px #edeae9;
     border-radius: 10px;
     min-height: 100px;
-    margin: 10px;
-    width: 100%;
+    margin: 5px 0px 5px 0px;
+    width: 256px;
+}
+
+.task-dragging{
+    border: 1px solid #4573D1;
+}
+
+.task-card h3{
+    font-family: "Monserrat-Light";
+    margin: 12px 16px;
+    font-size: 16px;
+    line-height: 22px;
+}
+.task-card h4{
+    font-family: "Monserrat-Light";
+    margin: 12px 16px;
+    font-size: 12px;
+    line-height: 22px;
 }

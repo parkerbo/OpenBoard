@@ -13,3 +13,18 @@ def getProject(id):
     project = Project.query.get(id);
 
     return project.to_dict()
+
+@projects_routes.route('/edit', methods=['POST'])
+@login_required
+def editProject():
+    projectId, title, description = itemgetter('projectId', 'title', 'description')(request.json)
+    project = Project.query.get(projectId);
+    if project:
+        try:
+            project.title = title
+            project.description = description
+            db.session.commit()
+            return project.to_dict()
+        except AssertionError as message:
+            print(str(message))
+            return jsonify({"error": str(message)}), 400
