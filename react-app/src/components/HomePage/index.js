@@ -48,13 +48,13 @@ const HomePage = () => {
     return (
 			<div className="homepage-main">
 				<div className="homepage-content">
-					<h5 id="homepage-date">Friday, November 19</h5>
+					<h5 id="homepage-date">Monday, November 22</h5>
 					<h2 id="homepage-greeting">Welcome back, {user.fullname}</h2>
 					<div className="homepage-content-widgets">
 						<div className="homepage-content-widgets-sort">
 							<div className="homepage-widget-half">
 								<div className="homepage-widget-content">
-									<h2>My Priorities</h2>
+									<h2 id="homepage-notepad-widget-title">My Priorities</h2>
 								</div>
 							</div>
 							<div className="homepage-widget-half">
@@ -78,7 +78,7 @@ const HomePage = () => {
 							</div>
 							<div className="homepage-widget-full">
 								<div className="homepage-widget-content">
-									<h2>Projects</h2>
+									<h2 id="homepage-notepad-widget-title">Projects</h2>
 								</div>
 							</div>
 						</div>

@@ -32,7 +32,6 @@ const ProjectPage = () => {
 
         const start = sections[source.droppableId];
 		const end = sections[destination.droppableId];
-        console.log(start)
 		if (start === end) {
 			const section = sections[source.droppableId];
 			const newTasksOrder = Array.from(section.tasks_order);
@@ -52,6 +51,7 @@ const ProjectPage = () => {
 			await dispatch(updateSection(newSectionId, newSection));
             return;
 		}
+            console.log(source.index)
             const start_tasks_order = Array.from(start.tasks_order);
             start_tasks_order.splice(source.index,1);
             const newStartSection = {
@@ -60,8 +60,7 @@ const ProjectPage = () => {
             }
             const droppedTaskId = parseInt(draggableId);
            const droppedTask = newStartSection.tasks[droppedTaskId];
-           // NEED TO UPDATE INDIVIUDAL TASK
-           delete newStartSection.tasks[source.index]
+           delete newStartSection.tasks[(source.index + 1)]
             const end_tasks_order = Array.from(end.tasks_order);
             end_tasks_order.splice(destination.index, 0, parseInt(draggableId));
             const newEndSection = {
@@ -77,6 +76,7 @@ const ProjectPage = () => {
             const newSectionsState = {
                 ...sections,
             };
+            console.log(newSectionsState)
             setSections(newSectionsState);
             await dispatch(updateSection(newStartSectionId, newStartSection));
             await dispatch(updateSection(newEndSectionId, newEndSection, droppedTaskId));
