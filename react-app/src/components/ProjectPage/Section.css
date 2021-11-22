@@ -11,6 +11,9 @@
     flex: 0 0 304px;
     width: 304px;
 }
+.board-section-title svg{
+    margin: 3px;
+}
 .board-section:hover{
     box-shadow: 0 0 0 1px #edeae9;
 }

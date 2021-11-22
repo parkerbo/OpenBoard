@@ -12,9 +12,10 @@ const RootPage = ({show, toggle, page}) => {
     const [project, setProject] = useState("")
     const dispatch = useDispatch();
     useEffect(async() => {
+        setLoaded(false);
         if(page === 'single-project'){
             const res = await dispatch(getProject(projectId))
-            setProject(res.title)
+            setProject(res)
             setLoaded(true)
         } else {
             setLoaded(true);
@@ -34,7 +35,7 @@ const RootPage = ({show, toggle, page}) => {
 				<HomePage />
 			</Route>
 			<Route path="/projects/:projectId">
-				<TopBar show={show} toggle={toggle} page={page} title={project}/>
+				<TopBar show={show} toggle={toggle} page={page} project={project}/>
                 <ProjectPage />
             </Route>
 		</div>

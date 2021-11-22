@@ -1,12 +1,16 @@
 import "./Section.css";
 import TaskList from "./TaskList"
 import Task from "./Task";
+import { FaPlus, FaEllipsisH } from "react-icons/fa";
+
 import { Droppable } from "react-beautiful-dnd";
 const Section = ({ section, tasks }) => {
 	return (
 		<div className="board-section">
 			<div className="board-section-title">
 				<h3>{section.title}</h3>
+                <FaPlus />
+                <FaEllipsisH />
 			</div>
 			<Droppable droppableId={section.id.toString()}>
 				{provided => (

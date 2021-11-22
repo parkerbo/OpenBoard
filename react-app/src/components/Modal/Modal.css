@@ -1,0 +1,56 @@
+.modal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    pointer-events: visible;
+
+}
+.modal-main{
+    position: absolute;
+    top: 100px;
+    width: 560px;
+    min-height: 460px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border:none;
+    border-radius: 12px;
+    color:black;
+}
+.modal-title{
+    font-family: "Montserrat-Bold";
+    font-size: 20px;
+    border-bottom: 1px solid #ECEAE9;
+    padding: 20px;
+}
+.modal-content{
+    padding: 20px;
+}
+.modal-content input{
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+    padding: 0px 10px;
+}
+.modal-content > textarea {
+    width: 100%;
+    resize: none;
+    font-size: 15px;
+    padding: 5px;
+    height: 200px;
+}
+#modal-label{
+    color: #6D6E6F;
+    font-size: 12px;
+    padding: 10px 0px;
+    font-family: "Montserrat-Bold";
+}
