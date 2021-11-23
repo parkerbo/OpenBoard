@@ -17,8 +17,12 @@
     scroll-padding-right: 80px;
     display: flex;
     height: 100%;
-    padding: 52px 12px 0;
+    padding: 25px 12px 0;
     position: relative;
     min-width: 1px;
     overflow-x: auto;
+}
+.projectpage-board-body-details-open{
+    min-width: calc(100% - 700px);
+    width: 45%;
 }
