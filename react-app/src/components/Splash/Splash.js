@@ -2,12 +2,14 @@ import "./Splash.css";
 import OpenBoardLogo from "../../images/OpenBoard-Logo.png";
 import sceneOne from "../../images/scene-1a.jpeg";
 import sceneTwo from "../../images/scene-1b.jpeg";
-
+import * as sessionActions from "../../store/session";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const Splash = () => {
 	const history = useHistory();
+	const dispatch = useDispatch();
 	const [headerStyle, setHeaderStyle] = useState("splash-header-container");
 
 	const changeHeaderStyle = (event) => {
@@ -24,6 +26,10 @@ const Splash = () => {
 			window.removeEventListener("scroll", changeHeaderStyle);
 		};
 	}, []);
+
+	const loginDemo = async() => {
+		await dispatch(sessionActions.login("demo@aa.io", "password"));
+	}
 
 	return (
 		<div class="splash-main">
@@ -42,6 +48,9 @@ const Splash = () => {
 							<p id="splash-log-in" onClick={() => history.push("/login")}>
 								Log In
 							</p>
+							<p id="splash-log-in" onClick={loginDemo}>
+								Demo
+							</p>
 							<button
 								id="splash-sign-up-top"
 								onClick={() => history.push("/sign-up")}
@@ -59,7 +68,20 @@ const Splash = () => {
 							<i> coding issues</i> so teams know what to do, why it matters,
 							and how to get it done.
 						</h4>
-						<button id="splash-sign-up-bottom">Get Started</button>
+						<div style={{ display: "flex" }}>
+							<button
+								id="splash-sign-up-bottom"
+								onClick={() => history.push("/sign-up")}
+							>
+								Get Started
+							</button>
+							<button
+								id="splash-demo-bottom"
+								onClick={loginDemo}
+							>
+								Demo
+							</button>
+						</div>
 					</div>
 					<div class="splash-section-1-column-2">
 						<div class="splash-scenes">
