@@ -91,7 +91,7 @@ const ProjectPage = () => {
 	return (
 		<div className="projectpage-main">
 			<div className="projectpage-board">
-				<div className={`projectpage-board-body`}>
+				<div className={`projectpage-board-body ${showTaskDetail?'projectpage-board-body-details-open':null}`}>
 					<DragDropContext onDragEnd={onDragEnd}>
 						{sections_order.map((sectionId) => {
 							const section = sections[sectionId[0]];

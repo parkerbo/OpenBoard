@@ -5,7 +5,7 @@ class Task(db.Model):
     __tablename__ = 'tasks'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255), nullable=False)
+    title = db.Column(db.Text)
     description = db.Column(db.Text)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     assignee_id = db.Column(db.Integer, db.ForeignKey("users.id"))
@@ -18,9 +18,15 @@ class Task(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
+    owner = db.relationship("User", backref='user', primaryjoin='Task.owner_id==User.id', lazy=True)
+    assignee = db.relationship("User", backref='assignee', primaryjoin='Task.assignee_id==User.id', lazy=True)
     tasks = db.relationship("Section", backref='section_tasks', cascade="all, delete", lazy=True)
 
     def to_dict(self):
+        assignee = None
+        if (self.assignee):
+            assignee = self.assignee.to_dict()
+
         comments = {}
         for comment in self.task_comments:
             comments[comment.id] = {
@@ -30,12 +36,13 @@ class Task(db.Model):
                 'created_at' : comment.created_at,
                 'updated_at' : comment.updated_at
             }
+
         return {
             'id': self.id,
             'title': self.title,
             'description': self.description,
-            'owner_id': self.owner_id,
-            'assignee_id': self.assignee_id,
+            'owner': self.owner.to_dict(),
+            'assignee': assignee,
             'section_id': self.section_id,
             'status' : self.status,
             'priority' : self.priority,

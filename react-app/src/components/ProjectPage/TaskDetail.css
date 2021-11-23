@@ -1,5 +1,5 @@
 .task-detail-overlay{
-    background-color: grey;
+    background-color: white;
     border-top: 1px solid #edeae9;
     bottom: 0;
     box-shadow: 0 0 0 1px #edeae9, 0 5px 20px 0 rgba(109, 110, 111, 0.08);;
@@ -22,4 +22,104 @@
     flex: 1 1 auto;
     flex-direction: column;
     min-height: 1px;
+}
+.task-detail-toolbar{
+    height: 56px;
+    display: flex;
+    flex-shrink: 0;
+    border-bottom: 1px solid #ECEAE9;
+}
+.task-detail-details{
+   display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 20px;
+    min-height: 1px;
+}
+
+
+#title-textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    height: auto;
+    outline: none;
+    font-size: 24px;
+    display: inline-block;
+    font-weight: 500;
+    min-height: 0px;
+    padding: 6px;
+}
+#title-textarea:hover{
+    outline: 1px solid #6D6E6F;
+    border-radius: 6px;
+}
+#title-textarea:focus{
+    outline: 1px solid #6D6E6F;
+    border-radius: 6px;
+}
+#task-detail-toolbar-complete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+#task-detail-toolbar-complete svg{
+    vertical-align: bottom;
+    margin-bottom: 1px;
+}
+#task-detail-toolbar-complete-button{
+    height: 28px;
+    background-color: white;
+    color:black;
+    font-size: 12px;
+    padding: 0 8px;
+    border-radius: 6px;
+    border: 1px solid #CECBCB;
+}
+#task-detail-close{
+    margin-left:auto;
+}
+.task-detail-fields{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.task-detail-fields-row{
+    display: flex;
+    align-items: center;
+    height: 36px;
+    padding: 10px 0px 10px 0px;
+}
+#task-detail-row-label{
+    width: 100px;
+    font-family: 'Montserrat-Bold';
+    font-size: 12px;
+    line-height: 18px;
+    color: #6d6e6f;
+    overflow: hidden;
+    padding-top: 2px;
+    max-width: 140px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#description-textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    height: 100px;
+    outline: none;
+    font-size: 14px;
+    display: inline-block;
+    font-weight: 500;
+    min-height: 0px;
+    padding: 6px;
+}
+#description-textarea:hover{
+    outline: 1px solid #6D6E6F;
+    border-radius: 6px;
+}
+#description-textarea:focus{
+    outline: 1px solid #6D6E6F;
+    border-radius: 6px;
 }
