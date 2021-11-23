@@ -20,7 +20,7 @@ class Task(db.Model):
 
     owner = db.relationship("User", backref='user', primaryjoin='Task.owner_id==User.id', lazy=True)
     assignee = db.relationship("User", backref='assignee', primaryjoin='Task.assignee_id==User.id', lazy=True)
-    tasks = db.relationship("Section", backref='section_tasks', cascade="all, delete", lazy=True)
+    tasks = db.relationship("Section", backref='section_tasks', lazy=True)
 
     def to_dict(self):
         assignee = None

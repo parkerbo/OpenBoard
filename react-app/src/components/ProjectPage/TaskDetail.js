@@ -1,8 +1,11 @@
 import "./TaskDetail.css";
 import { useTaskDetail } from "../../context/TaskDetailContext";
 import { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { MdDone } from "react-icons/md";
-const TaskDetail = ({ show, task }) => {
+import { getProject, updateTask, deleteTask } from "../../store/project";
+const TaskDetail = ({ show, task, projectId, sectionId }) => {
+    const dispatch = useDispatch();
     const didMount = useRef(false);
     const [saveState, setSaveState] = useState("");
 	const { setShowTaskDetail } = useTaskDetail();
@@ -54,7 +57,6 @@ const TaskDetail = ({ show, task }) => {
 			const delayDebounceFn = setTimeout(async () => {
 				if (didMount.current) {
 					const payload = {
-						taskId: task.id,
 						title: title,
                         description: description,
                         end_date: dueDate,
@@ -64,7 +66,10 @@ const TaskDetail = ({ show, task }) => {
 
 					};
 
-					// await dispatch(saveNotepad(payload));
+					const res = await dispatch(updateTask(task.id, payload));
+                    if (res) {
+                        await dispatch(getProject(projectId));
+                    }
 					setSaveState("All changes saved");
 					setTimeout(() => {
 						setSaveState("");
@@ -73,12 +78,16 @@ const TaskDetail = ({ show, task }) => {
 					didMount.current = true;
 				}
 
-				// Send Axios request here
 			}, 200);
 
 			return () => clearTimeout(delayDebounceFn);
 		}, [title, description,dueDate,assignee,priority,status]);
 
+    const executeDeleteTask = async() => {
+        await dispatch(deleteTask(task.section_id, task.id));
+        setShowTaskDetail(false);
+        await dispatch(getProject(projectId));
+    }
 	return (
 		<div
 			className={`task-detail-overlay ${
@@ -93,8 +102,10 @@ const TaskDetail = ({ show, task }) => {
 								<button id="task-detail-toolbar-complete-button">
 									<MdDone /> {task.completed ? "Completed" : "Mark Complete"}
 								</button>
+                                {saveState}
 							</div>
 							<div id="task-detail-close">
+                                <button onClick={executeDeleteTask}>Delete task</button>
 								<button
 									onClick={() => {
 										setShowTaskDetail(false);

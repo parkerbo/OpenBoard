@@ -40,7 +40,6 @@ const HomePage = () => {
                         didMount.current = true;
                     }
 
-					// Send Axios request here
 				}, 1000);
 
 				return () => clearTimeout(delayDebounceFn);

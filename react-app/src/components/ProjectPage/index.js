@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Section from "./Section";
 import TaskDetail from "./TaskDetail";
-import { getProject } from "../../store/project";
 import { useTaskDetail } from "../../context/TaskDetailContext";
 import { updateSection } from "../../store/project";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -18,7 +17,9 @@ const ProjectPage = () => {
 	const [sections, setSections] = useState(currentProject.sections);
 	useEffect(() => {
 		if (project) {
+            console.log("updated")
 			setCurrentProject(project);
+            setSections(project.sections)
 		}
 	}, [project, projectId]);
 	const onDragEnd = async (result) => {
@@ -106,7 +107,7 @@ const ProjectPage = () => {
 					</DragDropContext>
 
 				</div>
-<TaskDetail show={showTaskDetail} task={currentTask} />
+<TaskDetail show={showTaskDetail} task={currentTask} projectId={projectId} />
 			</div>
 
 		</div>

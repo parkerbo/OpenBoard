@@ -23,7 +23,7 @@ def updateSection(id):
         try:
             task = Task.query.get(taskId)
             task.section_id = id
-            oldSection = Section.query.get(id);
+            oldSection = Section.query.get(id)
             oldSection.tasks_order = newSection["tasks_order"]
             oldSection.tasks = newSection['tasks']
             db.session.commit()

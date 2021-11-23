@@ -46,6 +46,27 @@ export const saveProject = (payload) => async (dispatch) => {
 	}
 };
 
+export const deleteTask = (sectionId, taskId) => async (dispatch) => {
+    console.log(sectionId)
+    const data = {
+        'sectionId' : sectionId
+    }
+	const response = await fetch(`/api/tasks/${taskId}/delete`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+        body: JSON.stringify(data)
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		return response;
+	}
+};
+
 export const updateSection =
 	(sectionId, newSection, taskId) => async (dispatch) => {
 		let data;
@@ -71,6 +92,24 @@ export const updateSection =
 		if (response.ok) {
 			dispatch(reRenderSection(newSection));
 			return newSection;
+		} else {
+			return response;
+		}
+	};
+
+export const updateTask =
+	(taskId, task) => async (dispatch) => {
+
+		const response = await fetch(`/api/tasks/${taskId}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(task),
+		});
+
+		if (response.ok) {
+			return response;
 		} else {
 			return response;
 		}

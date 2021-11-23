@@ -4,7 +4,9 @@ import Task from "./Task";
 import { FaPlus, FaEllipsisH } from "react-icons/fa";
 
 import { Droppable } from "react-beautiful-dnd";
-const Section = ({ section, tasks }) => {
+import { useEffect, useState } from "react";
+const Section = ({section, tasks}) => {
+
 	return (
 		<div className="board-section">
 			<div className="board-section-title">
@@ -18,7 +20,7 @@ const Section = ({ section, tasks }) => {
                     innerRef={provided.innerRef}
                     provided ={provided}>
 						{Object.keys(tasks).map((key, index) => (
-							<Task key={tasks[key].id} task={tasks[key]} index={index} />
+							<Task key={tasks[key].id} task={tasks[key]} index={index}/>
 						))}
                         {provided.placeholder}
 					</TaskList>

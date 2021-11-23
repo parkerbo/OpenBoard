@@ -13,7 +13,6 @@ class Section(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
     projects = db.relationship("Project", backref='project_sections', cascade="all, delete", lazy=True)
-    section_tasks_rel = db.relationship("Task", backref='task_section', cascade="all, delete", lazy=True)
 
     def to_dict(self):
         tasks = {task.id:task.to_dict() for task in self.section_tasks}

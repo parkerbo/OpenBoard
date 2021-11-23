@@ -3,12 +3,15 @@ import Container from "./Container";
 import { MdCheckCircleOutline } from "react-icons/md";
 import { useTaskDetail } from "../../context/TaskDetailContext";
 import { Draggable } from "react-beautiful-dnd";
-const Task = ({ task, index }) => {
+import { useState, useEffect } from "react";
+const Task = ({task, index}) => {
+
     const {setShowTaskDetail, setCurrentTask} = useTaskDetail();
     const openTaskDetails = () => {
         setShowTaskDetail(true);
         setCurrentTask(task)
     }
+
 	return (
 		<Draggable draggableId={task.id.toString()} index={index}>
 			{(provided, snapshot) => (
@@ -30,7 +33,7 @@ const Task = ({ task, index }) => {
 							<h3>{task.title}</h3>
 						</div>
 						<div className="task-card-indicators">
-							{task.priority ? (
+							{task.priority !== 'null' ? (
 								<div
 									className="task-card-indicator"
 									id={`priority-${task.priority}`}
@@ -38,7 +41,7 @@ const Task = ({ task, index }) => {
 									{task.priority}
 								</div>
 							) : null}
-							{task.status ? (
+							{task.status !== 'null' ? (
 								<div className={`task-card-indicator status-${task.status}`}>
 									{task.status}
 								</div>
