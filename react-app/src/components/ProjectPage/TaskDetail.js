@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { MdDone } from "react-icons/md";
 import { getProject, updateTask, deleteTask } from "../../store/project";
-const TaskDetail = ({ show, task, projectId, sectionId }) => {
+const TaskDetail = ({ show, task, projectId }) => {
     const dispatch = useDispatch();
     const didMount = useRef(false);
     const [saveState, setSaveState] = useState("");

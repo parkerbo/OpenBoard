@@ -7,7 +7,7 @@ import { useRef, useState , useEffect} from "react";
 const Task = ({task, index}) => {
     const taskRef = useRef();
     const [active, setActive] = useState(false);
-    const {setShowTaskDetail, setCurrentTask} = useTaskDetail();
+    const {setShowTaskDetail, currentTask, setCurrentTask} = useTaskDetail();
     useEffect(() => {
 			// add when mounted
 			document.addEventListener("mousedown", handleClick);
@@ -25,6 +25,11 @@ const Task = ({task, index}) => {
 			return setActive(false);
 
 		};
+        useEffect(() => {
+            if (currentTask.id === task.id && currentTask.section_id !== task.section_id){
+                setCurrentTask(task)
+            }
+        }, [task])
     const openTaskDetails = (e) => {
         setActive(true)
         setShowTaskDetail(true);
