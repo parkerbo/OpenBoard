@@ -11,7 +11,7 @@ JavaScript | React | Redux
 ### Backend
 Python | Flask | SQLAlchemy
 ### Packages
-[React Beautiful Drag and Drop]((https://github.com/atlassian/react-beautiful-dnd))
+[React Beautiful Drag and Drop](https://github.com/atlassian/react-beautiful-dnd)
 
 ## Features
 # Create projects
