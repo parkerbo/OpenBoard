@@ -31,11 +31,43 @@ def seed_sections():
         title='Closed',
         created_at=today,
         updated_at=today)
+    section5 = Section(
+        project_id=2,
+        board_column=0,
+        tasks_order=[],
+        title='Backlog',
+        created_at=today,
+        updated_at=today)
+    section6 = Section(
+        project_id=2,
+        board_column=1,
+        tasks_order=[],
+        title='Open',
+        created_at=today,
+        updated_at=today)
+    section7 = Section(
+        project_id=2,
+        board_column=2,
+        tasks_order=[],
+        title='In Progress',
+        created_at=today,
+        updated_at=today)
+    section8 = Section(
+        project_id=2,
+        board_column=3,
+        title='Closed',
+        tasks_order=[],
+        created_at=today,
+        updated_at=today)
 
     db.session.add(section1)
     db.session.add(section2)
     db.session.add(section3)
     db.session.add(section4)
+    db.session.add(section5)
+    db.session.add(section6)
+    db.session.add(section7)
+    db.session.add(section8)
 
     db.session.commit()
 

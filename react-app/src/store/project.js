@@ -13,6 +13,25 @@ const reRenderSection = (section) => ({
 
 const initialState = { project: " " };
 
+export const createProject = (payload) => async (dispatch) => {
+	const response = await fetch(`/api/projects/`, {
+        method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+        body: JSON.stringify(payload)
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(loadProject(data));
+		return data;
+	} else {
+		return response;
+	}
+};
+
+
 export const getProject = (projectId) => async (dispatch) => {
 	const response = await fetch(`/api/projects/${projectId}`, {
 		headers: {
