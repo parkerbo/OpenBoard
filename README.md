@@ -4,6 +4,8 @@ OpenBoard is a task management application oriented towards bug tracking for sof
 
 <a href="https://openboard-app.herokuapp.com/">Visit OpenBoard</a>
 
+Checkout the [Wiki](https://github.com/parkerbo/OpenBoard/wiki) for more details!
+
 ## Technologies Used
 
 ### Frontend
