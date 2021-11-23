@@ -101,7 +101,7 @@ const ProjectPage = () => {
 							);
 
 							return (
-								<Section key={section.id} section={section} tasks={tasks} />
+								<Section key={section.id} section={section} tasks={tasks} projectId={projectId}/>
 							);
 						})}
 					</DragDropContext>

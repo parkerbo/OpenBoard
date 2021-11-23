@@ -66,6 +66,26 @@ export const deleteTask = (sectionId, taskId) => async (dispatch) => {
 		return response;
 	}
 };
+export const addTask = (sectionId, position) => async (dispatch) => {
+	const data = {
+		sectionId: sectionId,
+        position: position
+	};
+	const response = await fetch(`/api/tasks/`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		return response;
+	}
+};
 
 export const updateSection =
 	(sectionId, newSection, taskId) => async (dispatch) => {

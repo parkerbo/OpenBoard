@@ -167,7 +167,7 @@ const TaskDetail = ({ show, task, projectId, sectionId }) => {
 									<textarea
 										id="description-textarea"
 										type="text"
-										placeholder="Write a task name"
+										placeholder="Add more detail to this task..."
 										value={description}
 										onChange={handleDescriptionChange}
 									/>

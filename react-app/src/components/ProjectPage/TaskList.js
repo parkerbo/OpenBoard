@@ -6,7 +6,6 @@ const TaskList = (props) => {
 				className="board-section-tasks"
 			>
 				{props.children}
-				<div> + Add a task</div>
 			</div>
 		);
 }
