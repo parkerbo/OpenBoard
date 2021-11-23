@@ -144,6 +144,7 @@
 #splash-sign-up-bottom {
 	width: 150px;
 	margin-top: 9px;
+	margin-right: 10px;
 	font-family: "Montserrat-Bold";
 	height: 50px;
 	background-color: #0d0e10;
@@ -156,6 +157,24 @@
 #splash-sign-up-bottom:hover {
 	background-color: #f06a6a;
 	color: black;
+	cursor: pointer;
+}
+#splash-demo-bottom {
+	width: 150px;
+	margin-top: 9px;
+	margin-right: 10px;
+	font-family: "Montserrat-Bold";
+	height: 50px;
+	background-color: #796EFF;
+	color: white;
+	border: none;
+	font-size: 18px;
+	border-radius: 4px;
+}
+
+#splash-demo-bottom:hover {
+	background-color: #635ac7;
+	color: white;
 	cursor: pointer;
 }
 .splash-section-1-column-2{
