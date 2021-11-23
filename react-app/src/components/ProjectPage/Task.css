@@ -10,6 +10,19 @@
 	width: 100%;
 	cursor: pointer;
 }
+.task-card-active{
+    background-color: #F1F2FC;
+	display: flex;
+	flex-direction: column;
+	border: none;
+	box-shadow: 0 0 0 1px #4573D1;
+	border-radius: 10px;
+	min-height: 100px;
+	margin: 5px 0px 5px 0px;
+	width: 100%;
+	cursor: pointer;
+
+}
 .task-card:hover {
 	box-shadow: 0 0 0 1px #6d6e6f;
 }
@@ -20,7 +33,20 @@
 .task-drag-null {
 	cursor: pointer !important;
 }
-
+.task-card-active h3{
+    font-family: "Montserrat-Regular";
+	margin: 12px 16px;
+	font-size: 14px;
+	line-height: 22px;
+	padding-left: 7px;
+	margin: 0;
+}
+.task-card-active h4{
+    font-family: "Montserrat-Regular";
+	margin: 12px 16px;
+	font-size: 12px;
+	line-height: 22px;
+}
 .task-card h3 {
 	font-family: "Montserrat-Regular";
 	margin: 12px 16px;
