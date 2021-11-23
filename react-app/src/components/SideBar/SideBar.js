@@ -2,8 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
+import NewProject from "./NewProject";
 import { MdMenuOpen } from "react-icons/md";
-import { FaSquare } from "react-icons/fa";
+import { FaSquare, FaPlus } from "react-icons/fa";
 import OpenBoardLogo from "../../images/OpenBoard-Logo-Dark.png";
 import "./SideBar.css";
 import { MdHome, MdCheckCircleOutline, MdOutlineListAlt } from "react-icons/md";
@@ -41,7 +42,7 @@ const SideBar = ({ show, toggle }) => {
 				</NavLink>
 			</div>
 			<div className="sidebar-projects-section">
-				<div id="sidebar-projects-title">My Projects</div>
+				<div id="sidebar-projects-title">My Projects <NewProject /></div>
 				{user_projects
 					? Object.keys(user_projects).map((key) => (
 							<NavLink

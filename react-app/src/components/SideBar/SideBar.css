@@ -75,6 +75,7 @@
 	background-color: #4b4c4d !important;
 }
 #sidebar-projects-title {
+    display: flex;
 	padding: 15px 24px;
 }
 .sidebar-projects-section {
@@ -125,4 +126,7 @@
 }
 #sidebar-log-out-button:hover{
     background-color: #635ac7;
+}
+#sidebar-add-new-project-button{
+    margin-left: auto;
 }

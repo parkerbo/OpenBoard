@@ -30,7 +30,7 @@ const Section = ({section, tasks, projectId}) => {
 							<Task key={tasks[key].id} task={tasks[key]} index={index} />
 						))}
 						{provided.placeholder}
-						<div onClick={addTaskEnd}> + Add a task</div>
+						<div onClick={addTaskEnd} id="section-add-task-button-lower"> + Add a task</div>
 					</TaskList>
 				)}
 			</Droppable>
