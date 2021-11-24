@@ -2,6 +2,7 @@ import "./Modal.css";
 import { useRef } from "react";
 const Modal = (props) => {
     const modalRef = useRef();
+    const height = props.height?props.height:null
     if (props.show) {
 	return (<div className="modal" onClick={props.onClose}>
 		<div className="modal-main" onClick={(e) => e.stopPropagation() }>

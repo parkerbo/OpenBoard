@@ -18,9 +18,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    projects = db.relationship("Project", backref='user_project', cascade="all, delete, delete-orphan")
+    projects = db.relationship("Project", backref='user_project')
 
-    project_participants = db.relationship('Project', secondary=project_members_join, lazy="subquery", backref=db.backref('project_members', lazy=True))
+    project_participants = db.relationship('Project', secondary=project_members_join, lazy="subquery",passive_deletes=True, backref=db.backref('project_members', lazy=True))
 
     @property
     def password(self):

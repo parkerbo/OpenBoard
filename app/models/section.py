@@ -12,6 +12,8 @@ class Section(db.Model):
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
+    task = db.relationship('Task',cascade="all, delete, delete-orphan", lazy=True )
+
     projects = db.relationship("Project", backref='project_sections', cascade="all, delete", lazy=True)
 
     def to_dict(self):

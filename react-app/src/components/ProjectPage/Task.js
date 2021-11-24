@@ -1,37 +1,33 @@
 import "./Task.css";
 import Container from "./Container";
-import { MdCheckCircleOutline } from "react-icons/md";
+import {BsCheckCircle, BsFillCheckCircleFill} from 'react-icons/bs'
 import { useTaskDetail } from "../../context/TaskDetailContext";
 import { Draggable } from "react-beautiful-dnd";
+import { toggleCompleteTask, getProject} from "../../store/project";
+import { useDispatch } from "react-redux";
 import { useRef, useState , useEffect} from "react";
-const Task = ({task, index}) => {
+const Task = ({task, index, projectId}) => {
+    const dispatch = useDispatch();
     const taskRef = useRef();
     const [active, setActive] = useState(false);
     const {setShowTaskDetail, currentTask, setCurrentTask} = useTaskDetail();
-    useEffect(() => {
-			// add when mounted
-			document.addEventListener("mousedown", handleClick);
-			// return function to be called when unmounted
-			return () => {
-				document.removeEventListener("mousedown", handleClick);
-			};
-		}, []);
 
-		const handleClick = (e) => {
-			if (taskRef.current.contains(e.target)) {
-				// inside click
-				return setActive(true);
-			}
-			return setActive(false);
 
-		};
+        useEffect(() => {
+            if(currentTask.id === task.id){
+                return setActive(true)
+            }
+            return setActive(false)
+        },[currentTask])
         useEffect(() => {
             if (currentTask.id === task.id && currentTask.section_id !== task.section_id){
-                setCurrentTask(task)
+                setCurrentTask(task);
+            }
+            if (currentTask.id === task.id && currentTask.completed !== task.completed){
+                setCurrentTask(task);
             }
         }, [task])
     const openTaskDetails = (e) => {
-        setActive(true)
         setShowTaskDetail(true);
         setCurrentTask(task);
         setTimeout(() => {
@@ -39,6 +35,15 @@ const Task = ({task, index}) => {
 
         }, 200)
 
+    }
+
+    const toggleCompleted = async(e) => {
+        e.stopPropagation();
+        e.preventDefault()
+        const res = await dispatch(toggleCompleteTask(task.id))
+        if (res){
+            await dispatch(getProject(projectId))
+        }
     }
 
 	return (
@@ -52,12 +57,19 @@ const Task = ({task, index}) => {
 						{...provided.dragHandleProps}
 						className={`${active ? "task-card-active" : "task-card"} ${
 							snapshot.isDragging ? "task-dragging" : "task-drag-null"
-						}`}
+						} ${task.completed ? "task-completed" : null}`}
 					>
 						<div ref={taskRef}>
 							<div className="task-card-title">
-								<div id="task-card-check-mark">
-									<MdCheckCircleOutline size="1.2em" />
+								<div
+									id={`${task.completed ? "task-card-check-mark-completed" : "task-card-check-mark"}`}
+									onClick={toggleCompleted}
+								>
+									{task.completed ? (
+										<BsFillCheckCircleFill />
+									) : (
+										<BsCheckCircle />
+									)}
 								</div>
 								<h3>{task.title}</h3>
 							</div>
