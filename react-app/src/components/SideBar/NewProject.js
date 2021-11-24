@@ -33,25 +33,31 @@ const NewProject = () => {
 				show={showNewProjectModal}
 			>
 				<div id="modal-label">Project Title</div>
-                <form onSubmit={submitProject}>
-				<input
-					type="text"
-                    required
-					placeholder="Enter your new project title..."
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-				></input>
-				<div id="modal-label">Project Description</div>
-				<textarea
-					type="text"
-					placeholder="Give more details about this project..."
-					value={description}
-					onChange={(e) => setDescription(e.target.value)}
-				></textarea>
-				<div id="modal-button-container">
-					<button id="modal-button" type="submit">Create</button>
+				<form onSubmit={submitProject}>
+					<div style={{ padding: "0px 20px" }}>
+						<input
+							type="text"
+							required
+							placeholder="Enter your new project title..."
+							value={title}
+							onChange={(e) => setTitle(e.target.value)}
+						></input>
+					</div>
+					<div id="modal-label">Project Description</div>
+					<div style={{ padding: "0px 20px" }}>
+						<textarea
+							type="text"
+							placeholder="Give more details about this project..."
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+						></textarea>
+					</div><div id="modal-button-container">
+					<button id="modal-button" type="submit">
+						Create
+					</button>
 				</div>
-                </form>
+				</form>
+
 			</Modal>
 			<div
 				id="sidebar-add-new-project-button"

@@ -12,7 +12,7 @@ const reRenderSection = (section) => ({
 });
 
 const initialState = { project: " " };
-
+// PROJECT THUNKS
 export const createProject = (payload) => async (dispatch) => {
 	const response = await fetch(`/api/projects/`, {
         method: 'POST',
@@ -65,6 +65,23 @@ export const saveProject = (payload) => async (dispatch) => {
 	}
 };
 
+export const deleteProject = (projectId) => async (dispatch) => {
+
+	const response = await fetch(`/api/projects/${projectId}/delete`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		return response;
+	}
+};
+
+// TASK THUNKS
 export const deleteTask = (sectionId, taskId) => async (dispatch) => {
     console.log(sectionId)
     const data = {
@@ -135,6 +152,20 @@ export const updateSection =
 			return response;
 		}
 	};
+
+export const toggleCompleteTask = (taskId) => async (dispatch) => {
+	const response = await fetch(`/api/tasks/${taskId}/complete`, {
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	if (response.ok) {
+		return response.json();
+	} else {
+		return response;
+	}
+};
 
 export const updateTask =
 	(taskId, task) => async (dispatch) => {

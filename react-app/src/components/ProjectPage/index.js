@@ -88,6 +88,9 @@ const ProjectPage = () => {
 			updateSection(newEndSectionId, newEndSection, droppedTaskId)
 		);
         await dispatch(getProject(projectId))
+        if (showTaskDetail){
+            
+        }
 		return;
 	};
 

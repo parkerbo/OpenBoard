@@ -27,7 +27,7 @@ const Section = ({section, tasks, projectId}) => {
 				{(provided) => (
 					<TaskList innerRef={provided.innerRef} provided={provided}>
 						{Object.keys(tasks).map((key, index) => (
-							<Task key={tasks[key].id} task={tasks[key]} index={index} />
+							<Task key={tasks[key].id} task={tasks[key]} index={index} projectId={projectId}/>
 						))}
 						{provided.placeholder}
 						<div onClick={addTaskEnd} id="section-add-task-button-lower"> + Add a task</div>

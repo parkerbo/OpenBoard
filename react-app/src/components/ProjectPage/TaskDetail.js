@@ -3,12 +3,12 @@ import { useTaskDetail } from "../../context/TaskDetailContext";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { MdDone } from "react-icons/md";
-import { getProject, updateTask, deleteTask } from "../../store/project";
-const TaskDetail = ({ show, task, projectId, sectionId }) => {
+import { getProject, updateTask, deleteTask, toggleCompleteTask } from "../../store/project";
+const TaskDetail = ({ show, task, projectId }) => {
     const dispatch = useDispatch();
     const didMount = useRef(false);
     const [saveState, setSaveState] = useState("");
-	const { setShowTaskDetail } = useTaskDetail();
+	const { setShowTaskDetail, setCurrentTask } = useTaskDetail();
 	const [title, setTitle] = useState();
 	const [description, setDescription] = useState();
 	const [assignee, setAssignee] = useState(null);
@@ -88,6 +88,14 @@ const TaskDetail = ({ show, task, projectId, sectionId }) => {
         setShowTaskDetail(false);
         await dispatch(getProject(projectId));
     }
+    const toggleCompleted = async (e) => {
+			e.stopPropagation();
+			e.preventDefault();
+			const res = await dispatch(toggleCompleteTask(task.id));
+			if (res) {
+				await dispatch(getProject(projectId));
+			}
+		};
 	return (
 		<div
 			className={`task-detail-overlay ${
@@ -99,16 +107,24 @@ const TaskDetail = ({ show, task, projectId, sectionId }) => {
 					<>
 						<div className="task-detail-toolbar">
 							<div id="task-detail-toolbar-complete">
-								<button id="task-detail-toolbar-complete-button">
+								<button
+                                onClick={toggleCompleted}
+									id={
+										task.completed
+											? "task-detail-toolbar-complete-button-completed"
+											: "task-detail-toolbar-complete-button"
+									}
+								>
 									<MdDone /> {task.completed ? "Completed" : "Mark Complete"}
 								</button>
-                                {saveState}
+								{saveState}
 							</div>
 							<div id="task-detail-close">
-                                <button onClick={executeDeleteTask}>Delete task</button>
+								<button onClick={executeDeleteTask}>Delete task</button>
 								<button
 									onClick={() => {
 										setShowTaskDetail(false);
+										setCurrentTask("");
 									}}
 								>
 									Close details

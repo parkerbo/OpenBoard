@@ -76,6 +76,28 @@
     padding: 0 8px;
     border-radius: 6px;
     border: 1px solid #CECBCB;
+    cursor: pointer;
+}
+#task-detail-toolbar-complete-button-completed{
+    height: 28px;
+    background-color: #eaf9f4;
+    color:#467761;
+    font-size: 12px;
+    padding: 0 8px;
+    border-radius: 6px;
+    border: 1px solid #5da283;
+    opacity: 0.7;
+    cursor: pointer;
+}
+#task-detail-toolbar-complete-button:hover{
+    color:#467761;
+    border-color:#5da283;
+    background-color: #eaf9f4;
+
+}
+#task-detail-toolbar-complete-button-completed:hover{
+    opacity: 1;
+
 }
 #task-detail-close{
     margin-left:auto;

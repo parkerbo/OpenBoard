@@ -23,8 +23,11 @@
 	cursor: pointer;
 
 }
+.task-completed{
+    opacity: 0.6;
+}
 .task-card:hover {
-	box-shadow: 0 0 0 1px #6d6e6f;
+	box-shadow: 0 0 0 1px #6D6E6F;
 }
 
 .task-dragging {
@@ -75,8 +78,21 @@
 	border-radius: 10px;
 	cursor: pointer;
 }
+#task-card-check-mark-completed {
+	color: #5ca283;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-height: 22px;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
 #task-card-check-mark:hover {
 	color: #5ca283;
+}
+#task-card-check-mark-completed:hover {
+	color: #4d856c;
 }
 .task-card-indicators {
 	display: flex;

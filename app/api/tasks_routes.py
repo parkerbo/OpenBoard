@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
+from app.api.auth_routes import login
 from app.models import User, db, Project, Section, Task
 from operator import itemgetter
 import sqlalchemy
@@ -7,6 +8,14 @@ from datetime import datetime
 today = datetime.now()
 
 tasks_routes = Blueprint('tasks', __name__)
+
+@tasks_routes.route('/<int:id>/complete')
+@login_required
+def toggleComplete(id):
+    task = Task.query.get(id)
+    task.completed = not task.completed
+    db.session.commit()
+    return task.to_dict()
 
 @tasks_routes.route('/', methods=['POST'])
 @login_required

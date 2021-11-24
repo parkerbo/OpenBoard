@@ -84,3 +84,13 @@ def editProject():
         except AssertionError as message:
             print(str(message))
             return jsonify({"error": str(message)}), 400
+
+
+@projects_routes.route('/<int:id>/delete')
+@login_required
+def deleteProject(id):
+    project = Project.query.get(id);
+    db.session.delete(project)
+    db.session.commit()
+    
+    return {'Message':'Successfully deleted'}
