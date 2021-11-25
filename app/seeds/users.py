@@ -5,11 +5,11 @@ today = date.today()
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        full_name='Demo', email='demo@aa.io', password='password')
+        full_name='Demo Dillon', email='demo@aa.io', password='password')
     marnie = User(
-        full_name='marnie', email='marnie@aa.io', password='password')
+        full_name='Marnie Mayflower', email='marnie@aa.io', password='password')
     bobbie = User(
-        full_name='bobbie', email='bobbie@aa.io', password='password')
+        full_name='Bobbie Bouchillon', email='bobbie@aa.io', password='password')
 
     db.session.add(demo)
     db.session.add(marnie)

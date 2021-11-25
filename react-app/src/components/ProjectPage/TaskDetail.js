@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { MdDone } from "react-icons/md";
 import { BiArrowToRight } from "react-icons/bi";
 import { BsPersonCircle } from "react-icons/bs";
+import { IoIosCloseCircle } from "react-icons/io";
 import {
 	getProject,
 	updateTask,
@@ -20,6 +21,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const { setShowTaskDetail, setCurrentTask } = useTaskDetail();
 	const [title, setTitle] = useState();
+	const [showAssigneeDelete, setShowAssigneeDelete] = useState(false);
 	const [showAssigneeForm, setShowAssigneeForm] = useState(false);
 	const [description, setDescription] = useState();
 	const [assignee, setAssignee] = useState(null);
@@ -64,7 +66,9 @@ const TaskDetail = ({ show, task, projectId }) => {
 			// inside click
 			return;
 		}
-		return setShowAssigneeForm(false);
+		setShowAssigneeForm(false);
+		setShowAssigneeDelete(false);
+		return;
 	};
 	useEffect(() => {
 		if (task) {
@@ -99,7 +103,8 @@ const TaskDetail = ({ show, task, projectId }) => {
 					title: title,
 					description: description,
 					end_date: dueDate,
-					assignee: assignee? assignee.id : null,
+					assignee:
+						assignee === "null" || assignee === null ? "null" : assignee.id,
 					priority: priority,
 					status: status,
 				};
@@ -210,12 +215,16 @@ const TaskDetail = ({ show, task, projectId }) => {
 										{showAssigneeForm ? (
 											<>
 												<div id="task-detail-assignee-form" ref={assigneeDiv}>
-													<div id="task-detail-assignee-icon">
+													<div
+														id="task-detail-assignee-icon"
+														style={{ marginLeft: 1 }}
+													>
 														<BsPersonCircle size="1.4em" />
 													</div>
 													<input
 														ref={assigneeInput}
 														type="text"
+														placeholder={assignee ? assignee.fullname : null}
 														value={searchQuery}
 														onChange={(e) => setSearchQuery(e.target.value)}
 													/>
@@ -229,8 +238,9 @@ const TaskDetail = ({ show, task, projectId }) => {
 																			id="task-detail-search-result"
 																			onClick={() => {
 																				setAssignee(user);
-																				setShowAssigneeForm(false);
-                                                                                setSearchQuery("")
+																				setSearchQuery("");
+                                                                                setShowAssigneeForm(false);
+                                                                                setShowAssigneeDelete(false)
 																			}}
 																		>
 																			<h3>{user.fullname}</h3>
@@ -246,12 +256,31 @@ const TaskDetail = ({ show, task, projectId }) => {
 											<>
 												<div
 													id="task-detail-assignee"
+													onMouseEnter={() => setShowAssigneeDelete(true)}
+													onMouseLeave={() => setShowAssigneeDelete(false)}
 													onClick={() => setShowAssigneeForm(true)}
 												>
 													<div id="task-detail-assignee-icon">
 														<BsPersonCircle size="1.4em" />
 													</div>
-													{assignee ? assignee.fullname : "No assignee"}
+													{assignee ? (
+														<>
+															{assignee.fullname}
+															{showAssigneeDelete ? (
+																<div
+																	id="task-assignee-delete-button"
+																	onClick={(e) => {
+																		e.stopPropagation();
+																		setAssignee(null);
+																	}}
+																>
+																	<IoIosCloseCircle size="1.3em" />
+																</div>
+															) : null}
+														</>
+													) : (
+														"No assignee"
+													)}
 												</div>
 											</>
 										)}

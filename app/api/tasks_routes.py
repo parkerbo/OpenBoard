@@ -61,14 +61,16 @@ def updateTask(id):
         task.title = title
         task.description = description
         task.end_date = end_date
-        if assignee != "null":
+        if assignee == 'null':
+            task.assignee_id = db.null()
+        else:
             task.assignee_id = assignee
         if priority == "---":
-            task.priority = sqlalchemy.null()
+            task.priority = db.null()
         else:
             task.priority = priority
         if status == "---":
-            task.status = sqlalchemy.null()
+            task.status = db.null()
         else:
             task.status = status
 
