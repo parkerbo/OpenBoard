@@ -28,6 +28,7 @@ const Task = ({task, index, projectId}) => {
             }
         }, [task])
     const openTaskDetails = (e) => {
+        e.stopPropagation();
         setShowTaskDetail(true);
         setCurrentTask(task);
         setTimeout(() => {

@@ -3,6 +3,7 @@ import { Route, useParams } from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux";
 import { useEffect, useState } from "react";
 import { getProject } from "../../store/project";
+import LoadingScreen from "../LoadingScreen";
 import ProjectPage from "../ProjectPage";
 import HomePage from "../HomePage";
 import "./RootPage.css"

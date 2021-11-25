@@ -61,13 +61,16 @@ def updateTask(id):
         task.title = title
         task.description = description
         task.end_date = end_date
-        # task.assignee = assignee
+        if assignee == 'null':
+            task.assignee_id = db.null()
+        else:
+            task.assignee_id = assignee
         if priority == "---":
-            task.priority = sqlalchemy.null()
+            task.priority = db.null()
         else:
             task.priority = priority
         if status == "---":
-            task.status = sqlalchemy.null()
+            task.status = db.null()
         else:
             task.status = status
 
@@ -84,6 +87,8 @@ def deleteTask(id):
     print(sectionId)
     try:
         task = Task.query.get(id)
+        db.session.delete(task)
+        db.session.commit()
         section = Section.query.get(sectionId)
         newTasksOrder = section.tasks_order
         section.tasks_order = []
@@ -91,8 +96,6 @@ def deleteTask(id):
         db.session.refresh(section)
         newTasksOrder.remove(id)
         section.tasks_order = newTasksOrder
-        db.session.commit()
-        db.session.delete(task)
         db.session.commit()
         print("Deleted")
         return {'Message':"Successfully deleted."}
