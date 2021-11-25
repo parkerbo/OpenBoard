@@ -10,7 +10,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import "./ProjectPage.css";
 const ProjectPage = () => {
 	const { projectId } = useParams();
-	const { showTaskDetail, currentTask } = useTaskDetail();
+	const { showTaskDetail, currentTask, setShowTaskDetail, setCurrentTask } = useTaskDetail();
 	const dispatch = useDispatch();
 	const project = useSelector((state) => state.project);
 	const [currentProject, setCurrentProject] = useState(project);
@@ -18,11 +18,16 @@ const ProjectPage = () => {
 	const [sections, setSections] = useState(currentProject.sections);
 	useEffect(() => {
 		if (project) {
-            console.log("updated")
 			setCurrentProject(project);
             setSections(project.sections)
 		}
 	}, [project, projectId]);
+    useEffect(() => {
+			if (projectId){
+                setShowTaskDetail(false)
+                setCurrentTask("")
+            }
+		}, [projectId]);
 	const onDragEnd = async (result) => {
 		const { destination, source, draggableId } = result;
 		if (!destination) {
@@ -89,7 +94,7 @@ const ProjectPage = () => {
 		);
         await dispatch(getProject(projectId))
         if (showTaskDetail){
-            
+
         }
 		return;
 	};
@@ -97,7 +102,10 @@ const ProjectPage = () => {
 	return (
 		<div className="projectpage-main">
 			<div className="projectpage-board">
-				<div className={`projectpage-board-body ${showTaskDetail?'projectpage-board-body-details-open':null}`}>
+				<div onClick={() => {
+                    setCurrentTask("")
+                    setShowTaskDetail(false)
+                }} className={`projectpage-board-body ${showTaskDetail?'projectpage-board-body-details-open':null}`}>
 					<DragDropContext onDragEnd={onDragEnd}>
 						{sections_order.map((sectionId) => {
 							const section = sections[sectionId[0]];

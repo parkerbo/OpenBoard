@@ -124,9 +124,7 @@
     height: 36px;
     cursor: pointer;
 }
-#sidebar-log-out-button:hover{
-    background-color: #635ac7;
-}
+
 #sidebar-add-new-project-button{
     margin-left: auto;
 }

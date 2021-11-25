@@ -101,6 +101,43 @@
 }
 #task-detail-close{
     margin-left:auto;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+#task-detail-toolbar-delete{
+    width: 70px;
+    font-size: 12px;
+    border: 1px solid #CECBCB;
+    color: black;
+    background-color: #F06A6A;
+    border-radius: 5px;
+    height: 28px;
+    cursor: pointer;
+}
+#task-detail-toolbar-delete:hover{
+    background-color: #DF6064;
+}
+#task-detail-toolbar-close{
+    color: #6D6E6F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8px;
+    height: 30px;
+    width: 30px;
+    margin-top: 4px;
+    border-radius: 4px;
+    border:none;
+    position: relative;
+    transition-duration: .5s;
+    transition-property: background-color;
+}
+#task-detail-toolbar-close:hover{
+    background-color: #f5f1f1;
+    color: black;
+    cursor: pointer;
 }
 .task-detail-fields{
     display: flex;
@@ -112,6 +149,9 @@
     align-items: center;
     height: 36px;
     padding: 10px 0px 10px 0px;
+}
+#task-detail-row-content{
+    padding-left: 7px;
 }
 #task-detail-row-label{
     width: 100px;
@@ -144,4 +184,62 @@
 #description-textarea:focus{
     outline: 1px solid #6D6E6F;
     border-radius: 6px;
+}
+#task-detail-assignee{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+    border-radius: 6px;
+    border:none;
+}
+#task-detail-assignee:hover{
+    background-color: #f5f1f1;
+    cursor: pointer;
+}
+#task-detail-assignee-icon{
+    display: flex;
+    margin-right: 10px;
+    vertical-align: bottom;
+}
+#task-detail-assignee-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: relative;
+    border:1px solid #6D6E6F;
+}
+#task-detail-assignee-form > input{
+    outline: none;
+    border: none;
+    font-size: 16px;
+}
+#task-detail-assignee-search{
+    position: absolute;
+    width: 450px;
+    background-color: white;
+    border: 1px solid #ECEAE9;
+    border-radius: 5px;
+    top:36px;
+    left:0;
+}
+
+#task-detail-search-result{
+    display: flex;
+    height: 40px;
+    align-items: center;
+    padding-left: 20px;
+}
+#task-detail-search-result h3{
+    font-size: 14px;
+}
+#task-detail-search-result p{
+    padding-left: 10px;
+    font-size: 12px;
+}
+#task-detail-search-result:hover{
+   background-color: #F9F8F8;
+   cursor: pointer;
 }
