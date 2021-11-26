@@ -10,11 +10,14 @@ import { useEffect, useState } from "react";
 const Section = ({section, tasks, projectId}) => {
     const dispatch = useDispatch();
     const {setShowTaskDetail, setCurrentTask} = useTaskDetail();
-    const addTaskEnd = async() => {
+    const addTaskEnd = async(e) => {
         const newTask = await dispatch(addTask(section.id,'end'));
         await dispatch(getProject(projectId));
         setCurrentTask(newTask)
         setShowTaskDetail(true)
+        setTimeout(() => {
+            e.target.scrollIntoView({ behavior: "smooth" });
+        }, 200)
     }
 	return (
 		<div className="board-section">

@@ -193,6 +193,21 @@
     border-radius: 6px;
     border:none;
 }
+#task-detail-date-open{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+    position: relative;
+    border-radius: 6px;
+    border:none;
+}
+#task-detail-date-calendar{
+    position:absolute;
+    width: 400px;
+    top: 36px;
+    left: 0px;
+}
 #task-detail-assignee:hover{
     background-color: #f5f1f1;
     cursor: pointer;

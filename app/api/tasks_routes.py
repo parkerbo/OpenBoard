@@ -60,7 +60,10 @@ def updateTask(id):
         task = Task.query.get(id)
         task.title = title
         task.description = description
-        task.end_date = end_date
+        if end_date == 'null':
+            task.end_date = db.null()
+        else:
+            task.end_date = datetime.strptime(end_date)
         if assignee == 'null':
             task.assignee_id = db.null()
         else:

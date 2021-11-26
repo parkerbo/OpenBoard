@@ -23,6 +23,11 @@ class Task(db.Model):
     tasks = db.relationship("Section", backref='section_tasks', lazy=True)
 
     def to_dict(self):
+        endDate = None
+        if self.end_date:
+            endDate = self.end_date.strftime("%b %-d '%y")
+        else:
+            endDate = None
         assignee = None
         if (self.assignee):
             assignee = self.assignee.to_dict()
@@ -47,7 +52,8 @@ class Task(db.Model):
             'status' : self.status,
             'priority' : self.priority,
             'start_date': self.start_date,
-            'end_date' : self.end_date,
+            'end_date' : endDate,
+            'plain_format_date': self.end_date,
             'completed' : self.completed,
             'comments' : comments,
             'created_at' : self.created_at,
