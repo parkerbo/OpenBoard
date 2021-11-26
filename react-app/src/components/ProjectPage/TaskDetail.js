@@ -19,13 +19,13 @@ const TaskDetail = ({ show, task, projectId }) => {
 	const dispatch = useDispatch();
 	const didMount = useRef(false);
 	const assigneeDiv = useRef();
-    const dateDiv = useRef();
+	const dateDiv = useRef();
 	const assigneeInput = useRef();
 	const [saveState, setSaveState] = useState("");
 	const [searchQuery, setSearchQuery] = useState("");
 	const { setShowTaskDetail, setCurrentTask } = useTaskDetail();
 	const [title, setTitle] = useState();
-    const [properDate, setProperDate] = useState();
+	const [properDate, setProperDate] = useState();
 	const [showAssigneeDelete, setShowAssigneeDelete] = useState(false);
 	const [showDateDelete, setShowDateDelete] = useState(false);
 	const [showAssigneeForm, setShowAssigneeForm] = useState(false);
@@ -33,6 +33,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 	const [description, setDescription] = useState();
 	const [assignee, setAssignee] = useState(null);
 	const [dueDate, setDueDate] = useState();
+	const [serverDate, setServerDate] = useState();
 	const [priority, setPriority] = useState();
 	const [status, setStatus] = useState();
 	const [users, setUsers] = useState([]);
@@ -68,14 +69,14 @@ const TaskDetail = ({ show, task, projectId }) => {
 			};
 		}
 	}, [showAssigneeForm]);
-    useEffect(() => {
-			if (showDateForm) {
-				document.addEventListener("mousedown", handleClickDate);
-				return () => {
-					document.removeEventListener("mousedown", handleClickDate);
-				};
-			}
-		}, [showDateForm]);
+	useEffect(() => {
+		if (showDateForm) {
+			document.addEventListener("mousedown", handleClickDate);
+			return () => {
+				document.removeEventListener("mousedown", handleClickDate);
+			};
+		}
+	}, [showDateForm]);
 	const handleClick = (e) => {
 		if (assigneeDiv.current.contains(e.target)) {
 			// inside click
@@ -85,15 +86,15 @@ const TaskDetail = ({ show, task, projectId }) => {
 		setShowAssigneeDelete(false);
 		return;
 	};
-    const handleClickDate = (e) => {
-			if (dateDiv.current.contains(e.target)) {
-				// inside click
-				return;
-			}
-			setShowDateForm(false);
-			setShowDateDelete(false);
+	const handleClickDate = (e) => {
+		if (dateDiv.current.contains(e.target)) {
+			// inside click
 			return;
-		};
+		}
+		setShowDateForm(false);
+		setShowDateDelete(false);
+		return;
+	};
 	useEffect(() => {
 		if (task) {
 			setTitle(task.title);
@@ -105,8 +106,15 @@ const TaskDetail = ({ show, task, projectId }) => {
 			}
 			if (task.end_date) {
 				setDueDate(task.end_date);
+				const currentDate = new Date(task.plain_format_date);
+                const adjustedDate = new Date(task.plain_format_date);
+				adjustedDate.setDate(currentDate.getDate() + 1);
+				setProperDate(adjustedDate);
+				setServerDate(currentDate);
 			} else {
 				setDueDate(null);
+                setServerDate(null);
+                setProperDate(new Date());
 			}
 			if (task.priority) {
 				setPriority(task.priority);
@@ -118,13 +126,6 @@ const TaskDetail = ({ show, task, projectId }) => {
 			} else {
 				setStatus("---");
 			}
-            if(task.end_date){
-              const currentDate = new Date(task.plain_format_date)
-            currentDate.setDate(currentDate.getDate() + 1)
-            setProperDate(currentDate)
-            } else {
-                setProperDate(new Date())
-            }
 
 		}
 	}, [task]);
@@ -135,7 +136,9 @@ const TaskDetail = ({ show, task, projectId }) => {
 					title: title,
 					description: description,
 					end_date:
-						dueDate === "null" || dueDate === null ? "null" : new Date(dueDate),
+						serverDate === "null" || serverDate === null
+							? "null"
+							: new Date(serverDate),
 					assignee:
 						assignee === "null" || assignee === null ? "null" : assignee.id,
 					priority: priority,
@@ -145,6 +148,10 @@ const TaskDetail = ({ show, task, projectId }) => {
 				const res = await dispatch(updateTask(task.id, payload));
 				if (res) {
 					await dispatch(getProject(projectId));
+                    res.json().then(data => {
+                        setDueDate(data.end_date)
+                    })
+
 				}
 				setSaveState("All changes saved");
 				setTimeout(() => {
@@ -156,7 +163,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 		}, 200);
 
 		return () => clearTimeout(delayDebounceFn);
-	}, [title, description, dueDate, assignee, priority, status]);
+	}, [title, description, serverDate, assignee, priority, status]);
 
 	const executeDeleteTask = async () => {
 		await dispatch(deleteTask(task.section_id, task.id));
@@ -325,7 +332,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 										{showDateForm ? (
 											<div
 												id="task-detail-date-open"
-                                                ref={dateDiv}
+												ref={dateDiv}
 												onMouseEnter={() => setShowDateDelete(true)}
 												onMouseLeave={() => setShowDateDelete(false)}
 												onClick={() => setShowDateForm(true)}
@@ -334,12 +341,15 @@ const TaskDetail = ({ show, task, projectId }) => {
 													<BsCalendar size="1.4em" />
 												</div>
 												{dueDate ? dueDate : "No due date"}
-                                                <div id="task-detail-date-calendar">
-                                                    <Calendar value={properDate} onChange={(date) => {
-                                                        setProperDate(date)
-                                                        setDueDate(date.toString())}
-                                                        }/>
-                                                    </div>
+												<div id="task-detail-date-calendar">
+													<Calendar
+														value={properDate}
+														onChange={(date) => {
+															setProperDate(date);
+															setServerDate(date.toString());
+														}}
+													/>
+												</div>
 											</div>
 										) : (
 											<div

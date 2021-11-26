@@ -78,7 +78,7 @@ def updateTask(id):
             task.status = status
 
         db.session.commit()
-        return {'Message':"Success"}
+        return task.to_dict()
     except AssertionError as message:
         print(str(message))
         return jsonify({"error": str(message)}), 400
