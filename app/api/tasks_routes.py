@@ -63,7 +63,7 @@ def updateTask(id):
         if end_date == 'null':
             task.end_date = db.null()
         else:
-            task.end_date = datetime.strptime(end_date)
+            task.end_date = end_date
         if assignee == 'null':
             task.assignee_id = db.null()
         else:

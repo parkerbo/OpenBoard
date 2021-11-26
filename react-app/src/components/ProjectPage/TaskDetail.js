@@ -118,9 +118,14 @@ const TaskDetail = ({ show, task, projectId }) => {
 			} else {
 				setStatus("---");
 			}
-            const currentDate = new Date(task.plain_format_date)
+            if(task.end_date){
+              const currentDate = new Date(task.plain_format_date)
             currentDate.setDate(currentDate.getDate() + 1)
             setProperDate(currentDate)
+            } else {
+                setProperDate(new Date())
+            }
+
 		}
 	}, [task]);
 	useEffect(() => {
@@ -130,7 +135,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 					title: title,
 					description: description,
 					end_date:
-						dueDate === "null" || dueDate === null ? "null" : dueDate,
+						dueDate === "null" || dueDate === null ? "null" : new Date(dueDate),
 					assignee:
 						assignee === "null" || assignee === null ? "null" : assignee.id,
 					priority: priority,

@@ -12,7 +12,6 @@ class Task(db.Model):
     section_id = db.Column(db.Integer, db.ForeignKey("sections.id"), nullable=False)
     status = db.Column(db.String(100))
     priority = db.Column(db.String(100))
-    start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
     completed = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -51,7 +50,6 @@ class Task(db.Model):
             'section_id': self.section_id,
             'status' : self.status,
             'priority' : self.priority,
-            'start_date': self.start_date,
             'end_date' : endDate,
             'plain_format_date': self.end_date,
             'completed' : self.completed,

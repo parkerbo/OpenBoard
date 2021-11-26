@@ -204,7 +204,8 @@
 }
 #task-detail-date-calendar{
     position:absolute;
-    width: 400px;
+    width: 300px;
+    height: 300px;
     top: 36px;
     left: 0px;
 }
