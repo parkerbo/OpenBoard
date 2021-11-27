@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDone } from "react-icons/md";
 import { BiArrowToRight } from "react-icons/bi";
-import {MdExpandMore} from "react-icons/md";
+import Comment from "../Comment";
 import { BsPersonCircle, BsCalendar } from "react-icons/bs";
 import { IoIosCloseCircle } from "react-icons/io";
 import TextareaAutosize from "react-textarea-autosize";
@@ -16,7 +16,7 @@ import {
 	updateTask,
 	deleteTask,
 	toggleCompleteTask,
-    addTaskComment
+	addTaskComment,
 } from "../../store/project";
 const TaskDetail = ({ show, task, projectId }) => {
 	const dispatch = useDispatch();
@@ -202,14 +202,14 @@ const TaskDetail = ({ show, task, projectId }) => {
 			await dispatch(getProject(projectId));
 		}
 	};
-	const submitComment = async() => {
+	const submitComment = async () => {
 		const res = await dispatch(addTaskComment(task.id, comment));
-        if (res) {
-					await dispatch(getProject(projectId));
-					res.json().then((data) => {
-						setComments(data.comments);
-					});
-				}
+		if (res) {
+			await dispatch(getProject(projectId));
+			res.json().then((data) => {
+				setComments(data.comments);
+			});
+		}
 	};
 
 	const queryUsers = (users, searchQuery) => {
@@ -466,23 +466,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 							<div className="task-detail-comments-section">
 								{comments
 									? Object.keys(comments).map((key) => (
-											<div id="task-detail-view-comment" key={comments[key].id}>
-												<div>
-													<InitialsAvatar
-														className={`initials-avatar-medium`}
-														fullname={comments[key].owner.fullname}
-													/>
-												</div>
-												<div id="task-detail-inner-comment-content">
-													<div id="task-detail-comment-info">
-														<h3>{comments[key].owner.fullname}</h3>
-                                                        {currentUser.id === comments[key].owner.id?<div id="comment-actions-button"><MdExpandMore /></div>:null}
-													</div>
-													<div id="task-detail-comment-text">
-														<h4>{comments[key].comment}</h4>
-													</div>
-												</div>
-											</div>
+                                        <Comment comment={comments[key]} currentUser={currentUser} key={comments[key].id} />
 									  ))
 									: null}
 							</div>
@@ -517,7 +501,11 @@ const TaskDetail = ({ show, task, projectId }) => {
 					</div>
 					{commentOpen ? (
 						<div id="comment-toolbar">
-							<button id="comment-submit-button" onClick={submitComment} disabled={comment === ""}>
+							<button
+								id="comment-submit-button"
+								onClick={submitComment}
+								disabled={comment === ""}
+							>
 								Comment
 							</button>
 						</div>
