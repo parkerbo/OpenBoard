@@ -12,7 +12,6 @@ class Task(db.Model):
     section_id = db.Column(db.Integer, db.ForeignKey("sections.id"), nullable=False)
     status = db.Column(db.String(100))
     priority = db.Column(db.String(100))
-    start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
     completed = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -23,19 +22,18 @@ class Task(db.Model):
     tasks = db.relationship("Section", backref='section_tasks', lazy=True)
 
     def to_dict(self):
+        endDate = None
+        if self.end_date:
+            endDate = self.end_date.strftime("%b %-d '%y")
+        else:
+            endDate = None
         assignee = None
         if (self.assignee):
             assignee = self.assignee.to_dict()
 
         comments = {}
         for comment in self.task_comments:
-            comments[comment.id] = {
-                'comment_id' : comment.id,
-                'user_id' : comment.user_id,
-                'comment' : comment.comment,
-                'created_at' : comment.created_at,
-                'updated_at' : comment.updated_at
-            }
+            comments[comment.id] = comment.to_dict()
 
         return {
             'id': self.id,
@@ -46,8 +44,8 @@ class Task(db.Model):
             'section_id': self.section_id,
             'status' : self.status,
             'priority' : self.priority,
-            'start_date': self.start_date,
-            'end_date' : self.end_date,
+            'end_date' : endDate,
+            'plain_format_date': self.end_date,
             'completed' : self.completed,
             'comments' : comments,
             'created_at' : self.created_at,

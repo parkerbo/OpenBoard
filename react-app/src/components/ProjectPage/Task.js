@@ -60,7 +60,7 @@ const Task = ({task, index, projectId}) => {
 							snapshot.isDragging ? "task-dragging" : "task-drag-null"
 						} ${task.completed ? "task-completed" : null}`}
 					>
-						<div ref={taskRef}>
+						<div style={{height:"100%"}}ref={taskRef}>
 							<div className="task-card-title">
 								<div
 									id={`${task.completed ? "task-card-check-mark-completed" : "task-card-check-mark"}`}

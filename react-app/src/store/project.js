@@ -185,6 +185,63 @@ export const updateTask =
 		}
 	};
 
+export const getTask = (taskId) => async (dispatch) => {
+	const response = await fetch(`/api/tasks/${taskId}`);
+
+	if (response.ok) {
+		return response;
+	} else {
+		return response;
+	}
+};
+
+export const addTaskComment = (taskId, comment) => async (dispatch) => {
+    const data = {
+        'commentText': comment
+    }
+	const response = await fetch(`/api/tasks/${taskId}/comment`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
+	});
+
+	if (response.ok) {
+		return response;
+	} else {
+		return response;
+	}
+};
+export const updateTaskComment = (commentId, newComment) => async (dispatch) => {
+	const data = {
+		'newComment': newComment,
+	};
+	const response = await fetch(`/api/comments/${commentId}`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
+	});
+
+	if (response.ok) {
+		return response;
+	} else {
+		return response;
+	}
+};
+export const deleteComment =
+	(commentId) => async (dispatch) => {
+		const response = await fetch(`/api/comments/${commentId}/delete`);
+
+		if (response.ok) {
+			return response;
+		} else {
+			return response;
+		}
+	};
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case LOAD_PROJECT:

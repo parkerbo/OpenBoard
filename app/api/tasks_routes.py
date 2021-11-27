@@ -1,13 +1,19 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.api.auth_routes import login
-from app.models import User, db, Project, Section, Task
+from app.models import User, db, Project, Section, Task, Comment
 from operator import itemgetter
 import sqlalchemy
 from datetime import datetime
 today = datetime.now()
 
 tasks_routes = Blueprint('tasks', __name__)
+
+@tasks_routes.route('/<int:id>')
+@login_required
+def getTask(id):
+    task = Task.query.get(id)
+    return task.to_dict()
 
 @tasks_routes.route('/<int:id>/complete')
 @login_required
@@ -60,7 +66,10 @@ def updateTask(id):
         task = Task.query.get(id)
         task.title = title
         task.description = description
-        task.end_date = end_date
+        if end_date == 'null':
+            task.end_date = db.null()
+        else:
+            task.end_date = end_date
         if assignee == 'null':
             task.assignee_id = db.null()
         else:
@@ -75,7 +84,7 @@ def updateTask(id):
             task.status = status
 
         db.session.commit()
-        return {'Message':"Success"}
+        return task.to_dict()
     except AssertionError as message:
         print(str(message))
         return jsonify({"error": str(message)}), 400
@@ -84,7 +93,6 @@ def updateTask(id):
 @login_required
 def deleteTask(id):
     sectionId = itemgetter('sectionId')(request.json)
-    print(sectionId)
     try:
         task = Task.query.get(id)
         db.session.delete(task)
@@ -99,6 +107,29 @@ def deleteTask(id):
         db.session.commit()
         print("Deleted")
         return {'Message':"Successfully deleted."}
+    except AssertionError as message:
+        print(str(message))
+        return jsonify({"error": str(message)}), 400
+
+@tasks_routes.route('/<int:id>/comment', methods=['POST'])
+@login_required
+def addNewTaskComment(id):
+    commentText = itemgetter('commentText')(request.json)
+    userId = current_user.get_id()
+    task = Task.query.get(id)
+    try:
+        comment = Comment(
+            user_id=userId,
+            comment = commentText,
+            created_at=today,
+            updated_at=today
+        )
+        db.session.add(comment)
+        db.session.commit()
+        db.session.refresh(comment)
+        task.task_comments.append(comment)
+        db.session.commit()
+        return task.to_dict()
     except AssertionError as message:
         print(str(message))
         return jsonify({"error": str(message)}), 400
