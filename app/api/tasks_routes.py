@@ -9,6 +9,12 @@ today = datetime.now()
 
 tasks_routes = Blueprint('tasks', __name__)
 
+@tasks_routes.route('/<int:id>')
+@login_required
+def getTask(id):
+    task = Task.query.get(id)
+    return task.to_dict()
+
 @tasks_routes.route('/<int:id>/complete')
 @login_required
 def toggleComplete(id):

@@ -1,13 +1,17 @@
 import InitialsAvatar from "../InitialsAvatar";
 import { MdExpandMore } from "react-icons/md";
 import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateTaskComment, getProject , deleteComment} from "../../store/project";
 import TextareaAutoSize from "react-textarea-autosize";
-const Comment = ({ comment, currentUser }) => {
+const Comment = ({ comment, currentUser, projectId, updateComments }) => {
+    const dispatch = useDispatch();
 	const [showCommentActionsButton, setShowCommentActionsButton] =
 		useState(false);
 	const [showCommentActions, setShowCommentActions] = useState(false);
 	const [editCommentForm, setEditCommentForm] = useState(false);
 	const [commentText, setCommentText] = useState(comment.comment);
+	const [originalComment, setOriginalComment] = useState(comment.comment);
 	const commentActionsDiv = useRef();
 	useEffect(() => {
 		if (showCommentActions) {
@@ -26,6 +30,24 @@ const Comment = ({ comment, currentUser }) => {
 		setShowCommentActions(false);
 		return;
 	};
+
+	const updateComment = async (commentId, newComment) => {
+        const res = await dispatch(updateTaskComment(commentId, newComment));
+        if (res){
+            setOriginalComment(commentText);
+            await getProject(projectId);
+            setEditCommentForm(false);
+        }
+    };
+
+    const removeComment = async() => {
+       const res =  await dispatch(deleteComment(comment.id))
+       if(res){
+        updateComments();
+        setShowCommentActions(false);
+       }
+    }
+
 	return (
 		<div
 			id="task-detail-view-comment"
@@ -67,7 +89,7 @@ const Comment = ({ comment, currentUser }) => {
 									>
 										<span>Edit comment</span>
 									</div>
-									<div id="comment-single-action">
+									<div id="comment-single-action" onClick={removeComment}>
 										<span style={{ color: "#F06A6F" }}>Delete comment</span>
 									</div>
 								</div>
@@ -90,18 +112,21 @@ const Comment = ({ comment, currentUser }) => {
 							<div id="edit-comment-toolbar">
 								<button
 									id="comment-cancel-button"
-									onClick={() => setEditCommentForm(false)}
-                                    style={{marginRight: 10}}
+									onClick={() => {
+										setEditCommentForm(false);
+										setCommentText(originalComment);
+									}}
+									style={{ marginRight: 10 }}
 								>
 									Cancel
 								</button>
-								<button id="comment-edit-button" disabled={commentText === ""}>
+								<button id="comment-edit-button" disabled={commentText === ""} onClick={() => updateComment(comment.id,commentText)}>
 									Save Changes
 								</button>
 							</div>
 						</>
 					) : (
-						<h4>{comment.comment}</h4>
+						<h4>{originalComment}</h4>
 					)}
 				</div>
 			</div>

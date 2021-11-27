@@ -17,6 +17,7 @@ import {
 	deleteTask,
 	toggleCompleteTask,
 	addTaskComment,
+    getTask
 } from "../../store/project";
 const TaskDetail = ({ show, task, projectId }) => {
 	const dispatch = useDispatch();
@@ -54,6 +55,15 @@ const TaskDetail = ({ show, task, projectId }) => {
 		}
 		fetchData();
 	}, []);
+
+    const updateComments = async() => {
+        const newTask = await dispatch(getTask(task.id))
+        if (newTask) {
+            newTask.json().then((data) => {
+							setComments(data.comments);
+						});
+        }
+    }
 
 	const handleTitleChange = (e) => {
 		const value = e.target.value.replace(/[\r\n\v]+/g, "");
@@ -209,6 +219,8 @@ const TaskDetail = ({ show, task, projectId }) => {
 			res.json().then((data) => {
 				setComments(data.comments);
 			});
+            setComment("")
+            setCommentOpen(false)
 		}
 	};
 
@@ -466,7 +478,13 @@ const TaskDetail = ({ show, task, projectId }) => {
 							<div className="task-detail-comments-section">
 								{comments
 									? Object.keys(comments).map((key) => (
-                                        <Comment comment={comments[key]} currentUser={currentUser} key={comments[key].id} />
+											<Comment
+												comment={comments[key]}
+												currentUser={currentUser}
+												projectId={projectId}
+                                                updateComments={updateComments}
+												key={comments[key].id}
+											/>
 									  ))
 									: null}
 							</div>
