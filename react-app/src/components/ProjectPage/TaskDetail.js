@@ -2,24 +2,30 @@ import "./TaskDetail.css";
 import "react-calendar/dist/Calendar.css";
 import { useTaskDetail } from "../../context/TaskDetailContext";
 import { useEffect, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MdDone } from "react-icons/md";
 import { BiArrowToRight } from "react-icons/bi";
+import {MdExpandMore} from "react-icons/md";
 import { BsPersonCircle, BsCalendar } from "react-icons/bs";
 import { IoIosCloseCircle } from "react-icons/io";
 import TextareaAutosize from "react-textarea-autosize";
+import InitialsAvatar from "../InitialsAvatar";
 import Calendar from "react-calendar";
 import {
 	getProject,
 	updateTask,
 	deleteTask,
 	toggleCompleteTask,
+    addTaskComment
 } from "../../store/project";
 const TaskDetail = ({ show, task, projectId }) => {
 	const dispatch = useDispatch();
+	const currentUser = useSelector((state) => state.session.user);
+	const [comments, setComments] = useState();
 	const didMount = useRef(false);
 	const assigneeDiv = useRef();
 	const dateDiv = useRef();
+	const commentDiv = useRef();
 	const assigneeInput = useRef();
 	const [saveState, setSaveState] = useState("");
 	const [searchQuery, setSearchQuery] = useState("");
@@ -33,6 +39,8 @@ const TaskDetail = ({ show, task, projectId }) => {
 	const [description, setDescription] = useState();
 	const [assignee, setAssignee] = useState(null);
 	const [dueDate, setDueDate] = useState();
+	const [comment, setComment] = useState("");
+	const [commentOpen, setCommentOpen] = useState(false);
 	const [serverDate, setServerDate] = useState();
 	const [priority, setPriority] = useState();
 	const [status, setStatus] = useState();
@@ -77,6 +85,14 @@ const TaskDetail = ({ show, task, projectId }) => {
 			};
 		}
 	}, [showDateForm]);
+	useEffect(() => {
+		if (commentOpen) {
+			document.addEventListener("mousedown", handleClickComment);
+			return () => {
+				document.removeEventListener("mousedown", handleClickComment);
+			};
+		}
+	}, [commentOpen]);
 	const handleClick = (e) => {
 		if (assigneeDiv.current.contains(e.target)) {
 			// inside click
@@ -95,8 +111,17 @@ const TaskDetail = ({ show, task, projectId }) => {
 		setShowDateDelete(false);
 		return;
 	};
+	const handleClickComment = (e) => {
+		if (commentDiv.current.contains(e.target)) {
+			// inside click
+			return;
+		}
+		setCommentOpen(false);
+		return;
+	};
 	useEffect(() => {
 		if (task) {
+			didMount.current = false;
 			setTitle(task.title);
 			setDescription(task.description);
 			if (task.assignee) {
@@ -107,14 +132,14 @@ const TaskDetail = ({ show, task, projectId }) => {
 			if (task.end_date) {
 				setDueDate(task.end_date);
 				const currentDate = new Date(task.plain_format_date);
-                const adjustedDate = new Date(task.plain_format_date);
+				const adjustedDate = new Date(task.plain_format_date);
 				adjustedDate.setDate(currentDate.getDate() + 1);
 				setProperDate(adjustedDate);
 				setServerDate(currentDate);
 			} else {
 				setDueDate(null);
-                setServerDate(null);
-                setProperDate(new Date());
+				setServerDate(null);
+				setProperDate(new Date());
 			}
 			if (task.priority) {
 				setPriority(task.priority);
@@ -126,7 +151,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 			} else {
 				setStatus("---");
 			}
-
+			setComments(task.comments);
 		}
 	}, [task]);
 	useEffect(() => {
@@ -148,10 +173,9 @@ const TaskDetail = ({ show, task, projectId }) => {
 				const res = await dispatch(updateTask(task.id, payload));
 				if (res) {
 					await dispatch(getProject(projectId));
-                    res.json().then(data => {
-                        setDueDate(data.end_date)
-                    })
-
+					res.json().then((data) => {
+						setDueDate(data.end_date);
+					});
 				}
 				setSaveState("All changes saved");
 				setTimeout(() => {
@@ -177,6 +201,15 @@ const TaskDetail = ({ show, task, projectId }) => {
 		if (res) {
 			await dispatch(getProject(projectId));
 		}
+	};
+	const submitComment = async() => {
+		const res = await dispatch(addTaskComment(task.id, comment));
+        if (res) {
+					await dispatch(getProject(projectId));
+					res.json().then((data) => {
+						setComments(data.comments);
+					});
+				}
 	};
 
 	const queryUsers = (users, searchQuery) => {
@@ -215,9 +248,12 @@ const TaskDetail = ({ show, task, projectId }) => {
 									}
 								>
 									<MdDone /> {task.completed ? "Completed" : "Mark Complete"}
-								</button>
-								{saveState}
+								</button>{" "}
+								<div style={{ marginLeft: "10px" }}>
+									<p>{saveState}</p>
+								</div>
 							</div>
+
 							<div id="task-detail-close">
 								<div>
 									<button
@@ -239,7 +275,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 							</div>
 						</div>
 						<div className="task-detail-details">
-							<div>
+							<div style={{ padding: "20px 20px 0px 20px" }}>
 								<TextareaAutosize
 									id="title-textarea"
 									type="text"
@@ -255,11 +291,12 @@ const TaskDetail = ({ show, task, projectId }) => {
 										{showAssigneeForm ? (
 											<>
 												<div id="task-detail-assignee-form" ref={assigneeDiv}>
-													<div
-														id="task-detail-assignee-icon"
-														style={{ marginLeft: 1 }}
-													>
-														<BsPersonCircle size="1.4em" />
+													<div id="task-detail-assignee-icon">
+														{assignee ? (
+															<InitialsAvatar fullname={assignee.fullname} />
+														) : (
+															<BsPersonCircle size="1.5em" />
+														)}
 													</div>
 													<input
 														ref={assigneeInput}
@@ -300,8 +337,15 @@ const TaskDetail = ({ show, task, projectId }) => {
 													onMouseLeave={() => setShowAssigneeDelete(false)}
 													onClick={() => setShowAssigneeForm(true)}
 												>
-													<div id="task-detail-assignee-icon">
-														<BsPersonCircle size="1.4em" />
+													<div
+														id="task-detail-assignee-icon"
+														style={{ marginLeft: -1 }}
+													>
+														{assignee ? (
+															<InitialsAvatar fullname={assignee.fullname} />
+														) : (
+															<BsPersonCircle size="1.5em" />
+														)}
 													</div>
 													{assignee ? (
 														<>
@@ -369,7 +413,8 @@ const TaskDetail = ({ show, task, projectId }) => {
 																id="task-assignee-delete-button"
 																onClick={(e) => {
 																	e.stopPropagation();
-																	setDueDate(null);
+																	setServerDate(null);
+																	setProperDate(new Date());
 																}}
 															>
 																<IoIosCloseCircle size="1.3em" />
@@ -418,9 +463,66 @@ const TaskDetail = ({ show, task, projectId }) => {
 									/>
 								</div>
 							</div>
+							<div className="task-detail-comments-section">
+								{comments
+									? Object.keys(comments).map((key) => (
+											<div id="task-detail-view-comment" key={comments[key].id}>
+												<div>
+													<InitialsAvatar
+														className={`initials-avatar-medium`}
+														fullname={comments[key].owner.fullname}
+													/>
+												</div>
+												<div id="task-detail-inner-comment-content">
+													<div id="task-detail-comment-info">
+														<h3>{comments[key].owner.fullname}</h3>
+                                                        {currentUser.id === comments[key].owner.id?<div id="comment-actions-button"><MdExpandMore /></div>:null}
+													</div>
+													<div id="task-detail-comment-text">
+														<h4>{comments[key].comment}</h4>
+													</div>
+												</div>
+											</div>
+									  ))
+									: null}
+							</div>
 						</div>
 					</>
 				) : null}
+			</div>
+			<div className="task-detail-comment-container">
+				<div>
+					<InitialsAvatar
+						fullname={currentUser.fullname}
+						className={`initials-avatar-medium`}
+					/>
+				</div>
+				<div id="task-detail-comment-entry-row" ref={commentDiv}>
+					<div
+						id={
+							commentOpen
+								? "task-detail-comment-textarea-field"
+								: "task-detail-comment-textarea-field-closed"
+						}
+					>
+						<TextareaAutosize
+							id="comment-textarea"
+							type="text"
+							minRows={commentOpen ? 3 : 1}
+							onClick={() => setCommentOpen(true)}
+							placeholder="Ask a question or post an update..."
+							value={comment}
+							onChange={(e) => setComment(e.target.value)}
+						/>
+					</div>
+					{commentOpen ? (
+						<div id="comment-toolbar">
+							<button id="comment-submit-button" onClick={submitComment} disabled={comment === ""}>
+								Comment
+							</button>
+						</div>
+					) : null}
+				</div>
 			</div>
 		</div>
 	);

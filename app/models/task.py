@@ -33,13 +33,7 @@ class Task(db.Model):
 
         comments = {}
         for comment in self.task_comments:
-            comments[comment.id] = {
-                'comment_id' : comment.id,
-                'user_id' : comment.user_id,
-                'comment' : comment.comment,
-                'created_at' : comment.created_at,
-                'updated_at' : comment.updated_at
-            }
+            comments[comment.id] = comment.to_dict()
 
         return {
             'id': self.id,

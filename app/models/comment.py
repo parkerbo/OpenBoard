@@ -16,3 +16,15 @@ class Comment(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
 
     task_comments = db.relationship('Task', secondary=task_comments_join, lazy="subquery", backref=db.backref('task_comments', lazy=True))
+
+    owner = db.relationship("User", backref='owner', primaryjoin='Comment.user_id==User.id', lazy=True)
+
+    def to_dict(self):
+
+        return {
+            'id': self.id,
+            'owner': self.owner.to_dict(),
+            'comment': self.comment,
+            'created_at' : self.created_at,
+            'updated_at' : self.updated_at
+        }

@@ -185,6 +185,25 @@ export const updateTask =
 		}
 	};
 
+export const addTaskComment = (taskId, comment) => async (dispatch) => {
+    const data = {
+        'commentText': comment
+    }
+	const response = await fetch(`/api/tasks/${taskId}/comment`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(data),
+	});
+
+	if (response.ok) {
+		return response;
+	} else {
+		return response;
+	}
+};
+
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case LOAD_PROJECT:

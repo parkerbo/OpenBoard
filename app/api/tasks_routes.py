@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.api.auth_routes import login
-from app.models import User, db, Project, Section, Task
+from app.models import User, db, Project, Section, Task, Comment
 from operator import itemgetter
 import sqlalchemy
 from datetime import datetime
@@ -87,7 +87,6 @@ def updateTask(id):
 @login_required
 def deleteTask(id):
     sectionId = itemgetter('sectionId')(request.json)
-    print(sectionId)
     try:
         task = Task.query.get(id)
         db.session.delete(task)
@@ -102,6 +101,29 @@ def deleteTask(id):
         db.session.commit()
         print("Deleted")
         return {'Message':"Successfully deleted."}
+    except AssertionError as message:
+        print(str(message))
+        return jsonify({"error": str(message)}), 400
+
+@tasks_routes.route('/<int:id>/comment', methods=['POST'])
+@login_required
+def addNewTaskComment(id):
+    commentText = itemgetter('commentText')(request.json)
+    userId = current_user.get_id()
+    task = Task.query.get(id)
+    try:
+        comment = Comment(
+            user_id=userId,
+            comment = commentText,
+            created_at=today,
+            updated_at=today
+        )
+        db.session.add(comment)
+        db.session.commit()
+        db.session.refresh(comment)
+        task.task_comments.append(comment)
+        db.session.commit()
+        return task.to_dict()
     except AssertionError as message:
         print(str(message))
         return jsonify({"error": str(message)}), 400
