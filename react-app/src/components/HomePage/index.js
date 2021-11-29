@@ -1,6 +1,7 @@
 import "./HomePage.css"
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
+import Priorities from "../Priorities";
 import { saveNotepad, getNotepad } from "../../store/session";
 import {MdLock} from "react-icons/md"
 
@@ -51,11 +52,7 @@ const HomePage = () => {
 					<h2 id="homepage-greeting">Welcome back, {user.fullname}</h2>
 					<div className="homepage-content-widgets">
 						<div className="homepage-content-widgets-sort">
-							<div className="homepage-widget-half">
-								<div className="homepage-widget-content">
-									<h2 id="homepage-notepad-widget-title">My Priorities</h2>
-								</div>
-							</div>
+							<Priorities />
 							<div className="homepage-widget-half">
 								<div className="homepage-widget-content">
 									<h2 id="homepage-notepad-widget-title">

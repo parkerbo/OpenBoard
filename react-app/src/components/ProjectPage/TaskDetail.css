@@ -457,7 +457,7 @@
 }
 #comment-actions-list{
     position: absolute;
-    display: flex;
+    display: block;
     right:0;
     top:30px;
     flex-direction: column;
@@ -467,6 +467,18 @@
     box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
     border-radius: 3px;
 
+}
+#last-comment-actions-list{
+    position: absolute;
+    display: block;
+    right:0;
+    bottom:30px;
+    flex-direction: column;
+    width: 150px;
+    z-index: 8;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    border-radius: 3px;
 }
 #comment-single-action{
     height: 36px;

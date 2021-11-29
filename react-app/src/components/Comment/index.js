@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateTaskComment, getProject , deleteComment} from "../../store/project";
 import TextareaAutoSize from "react-textarea-autosize";
-const Comment = ({ comment, currentUser, projectId, updateComments }) => {
+const Comment = ({ comment, currentUser, projectId, updateComments, lastComment }) => {
     const dispatch = useDispatch();
 	const [showCommentActionsButton, setShowCommentActionsButton] =
 		useState(false);
@@ -78,7 +78,7 @@ const Comment = ({ comment, currentUser, projectId, updateComments }) => {
 						>
 							<MdExpandMore size="1.3em" />
 							{showCommentActions ? (
-								<div id="comment-actions-list">
+								<div id={lastComment?'last-comment-actions-list':'comment-actions-list'}>
 									<div
 										id="comment-single-action"
 										onClick={(e) => {
@@ -125,8 +125,9 @@ const Comment = ({ comment, currentUser, projectId, updateComments }) => {
 								</button>
 							</div>
 						</>
-					) : (
+					) : (<>
 						<h4>{originalComment}</h4>
+						</>
 					)}
 				</div>
 			</div>

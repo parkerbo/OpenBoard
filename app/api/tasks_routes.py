@@ -27,7 +27,7 @@ def toggleComplete(id):
 @login_required
 def createTask():
     userId = current_user.get_id()
-    sectionId, position = itemgetter('sectionId', 'position')(request.json)
+    sectionId,position = itemgetter('sectionId', 'position')(request.json)
     try:
         section = Section.query.get(sectionId)
         newTask = Task(

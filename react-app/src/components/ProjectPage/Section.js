@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 const Section = ({section, tasks, projectId}) => {
     const dispatch = useDispatch();
     const {setShowTaskDetail, setCurrentTask} = useTaskDetail();
+    const [newTask, setNewTask] = useState(false);
     const addTaskEnd = async(e) => {
         const newTask = await dispatch(addTask(section.id,'end'));
         await dispatch(getProject(projectId));
@@ -33,7 +34,8 @@ const Section = ({section, tasks, projectId}) => {
 							<Task key={tasks[key].id} task={tasks[key]} index={index} projectId={projectId}/>
 						))}
 						{provided.placeholder}
-						<div onClick={addTaskEnd} id="section-add-task-button-lower"> + Add a task</div>
+
+						<div onClick={(addTaskEnd)} id="section-add-task-button-lower"> + Add a task</div>
 					</TaskList>
 				)}
 			</Droppable>

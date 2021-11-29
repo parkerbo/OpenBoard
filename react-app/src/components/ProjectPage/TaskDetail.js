@@ -47,6 +47,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 	const [status, setStatus] = useState();
 	const [users, setUsers] = useState([]);
 
+
 	useEffect(() => {
 		async function fetchData() {
 			const response = await fetch("/api/users/");
@@ -477,11 +478,12 @@ const TaskDetail = ({ show, task, projectId }) => {
 							</div>
 							<div className="task-detail-comments-section">
 								{comments
-									? Object.keys(comments).map((key) => (
+									? Object.keys(comments).map((key, index) => (
 											<Comment
 												comment={comments[key]}
 												currentUser={currentUser}
 												projectId={projectId}
+												lastComment={Object.keys(comments).length - 1 === index}
                                                 updateComments={updateComments}
 												key={comments[key].id}
 											/>

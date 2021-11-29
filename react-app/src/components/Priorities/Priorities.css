@@ -1,0 +1,46 @@
+.priorities-topbar{
+    border-bottom: 1px solid #ECEAE9;
+}
+.priorities-nav{
+    display: flex;
+    margin-left: 24px;
+    padding-top: 7px;
+}
+#priorities-notepad-widget-title{
+    font-size: 20px;
+    line-height: 28px;
+    flex-shrink: 0;
+    margin: 24px 24px 0px 24px;
+}
+#priorities-nav-item{
+    font-size: 14px;
+    margin-right: 20px;
+    padding-bottom: 10px;
+    color: #6D6E6F;
+    font-family: "Montserrat-Regular";
+    font-weight: 900;
+}
+#priorities-nav-item:hover{
+    cursor:pointer;
+    color: black;
+    border-bottom: 3px solid black;
+}
+#priorities-nav-item-active{
+    font-size: 14px;
+    padding-bottom: 10px;
+    margin-right: 20px;
+    color:black;
+    border-bottom: 3px solid black;
+    font-family: "Montserrat-Regular";
+    font-weight: 900;
+}
+#priority-task-title{
+    display: flex;
+    min-height: 30px;
+    padding: 5px 0px;
+    font-family: "Montserrat";
+    border-bottom: 1px solid #ECEAE9;
+}
+.priorities-list{
+    padding: 20px 20px;
+}

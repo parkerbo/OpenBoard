@@ -10,6 +10,17 @@
 	width: 100%;
 	cursor: pointer;
 }
+.task-card-new {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	border: none;
+	box-shadow: 0 0 0 1px #6D6E6F;
+	border-radius: 10px;
+	flex-basis: 100px;
+	margin: 5px 0px 5px 0px;
+	width: 100%;
+}
 .task-card-active{
     background-color: #F1F2FC;
 	display: flex;
@@ -138,4 +149,15 @@
 .status-On{
     background-color: #4ecbc4;
     color: black;
+}
+#new-task-input{
+    margin-left: 10px;
+}
+
+#new-task-input input{
+    outline:none;
+    border:none;
+    font-family: "Montserrat-Regular";
+    font-weight: 900;
+    font-size: 14px;
 }
