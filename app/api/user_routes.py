@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from sqlalchemy.orm import load_only
-from app.models import User, db
+from app.models import User, db, Task
 from operator import itemgetter
+
+from datetime import datetime
+today = datetime.now()
 
 user_routes = Blueprint('users', __name__)
 
@@ -42,3 +45,22 @@ def getNotepad():
         return {'content': user_notepad.notepad}
     else:
         return {'content':''}
+
+@user_routes.route('/priorities')
+@login_required
+def getPriorities():
+    userId = current_user.get_id()
+    priorities = {
+        'upcoming': {},
+        'overdue': {},
+        'completed': {}
+    }
+    upcoming_tasks = Task.query.filter(Task.assignee_id == userId).all();
+    for task in upcoming_tasks:
+        if (task.end_date == None or task.end_date >= today.date()) and not task.completed:
+            priorities['upcoming'][task.id] = task.to_dict()
+        if (task.end_date != None and task.end_date < today.date() and not task.completed):
+            priorities['overdue'][task.id] = task.to_dict()
+        if task.completed:
+            priorities['completed'][task.id] = task.to_dict()
+    return priorities

@@ -34,6 +34,7 @@ const TopBar = ({ show, toggle, page, project }) => {
 	const toggleButtonClassName = show
 		? "topbar-expand-sidebar-hidden"
 		: "topbar-expand-sidebar";
+
 	const [headerStyle, setHeaderStyle] = useState("openboard-topbar-home");
 	const changeTopBarStyle = (event) => {
 		const root = document.getElementsByClassName("openboard-root-page")[0];
@@ -46,13 +47,6 @@ const TopBar = ({ show, toggle, page, project }) => {
 		}
 	};
 
-	useEffect(() => {
-		const root = document.getElementsByClassName("openboard-root-page")[0];
-		root.addEventListener("scroll", changeTopBarStyle);
-		return () => {
-			root.removeEventListener("scroll", changeTopBarStyle);
-		};
-	}, []);
 
      useEffect(() => {
 				const delayDebounceFn = setTimeout(async () => {

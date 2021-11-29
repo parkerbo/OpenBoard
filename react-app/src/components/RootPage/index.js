@@ -1,9 +1,9 @@
 import TopBar from "../TopBar";
 import { Route, useParams } from "react-router-dom";
-import { useSelector, useDispatch} from "react-redux";
+import { useDispatch} from "react-redux";
 import { useEffect, useState } from "react";
 import { getProject } from "../../store/project";
-import LoadingScreen from "../LoadingScreen";
+import { getPriorities } from "../../store/priorities";
 import ProjectPage from "../ProjectPage";
 import HomePage from "../HomePage";
 import "./RootPage.css"
@@ -19,6 +19,7 @@ const RootPage = ({show, toggle, page}) => {
             setProject(res)
             setLoaded(true)
         } else {
+            await dispatch(getPriorities());
             setLoaded(true);
         }
     }, [dispatch, page, projectId])
