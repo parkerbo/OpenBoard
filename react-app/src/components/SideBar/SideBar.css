@@ -128,3 +128,9 @@
 #sidebar-add-new-project-button{
     margin-left: auto;
 }
+#add-project-button{
+	margin-left: auto;
+}
+#add-project-button:hover{
+	cursor:pointer;
+}

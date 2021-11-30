@@ -59,6 +59,22 @@
     color: black;
     cursor: pointer;
 }
+#top-bar-project-icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-right: 10px;
+}
+#top-bar-project-icon{
+    width: 48px;
+    height: 48px;
+    background-color: #F06A6A;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .top-bar-project-details-options{
   z-index: 4;
   left:0;

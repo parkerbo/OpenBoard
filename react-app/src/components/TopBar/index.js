@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import Modal from "../Modal";
 import { authenticate } from "../../store/session";
 import { useHistory } from "react-router";
+import {FaProjectDiagram} from 'react-icons/fa'
 import { saveProject, deleteProject} from "../../store/project";
 
 
@@ -50,7 +51,7 @@ const TopBar = ({ show, toggle, page, project }) => {
 
      useEffect(() => {
 				const delayDebounceFn = setTimeout(async () => {
-					if (didMount.current) {
+					if (didMount.current && projectTitle !== "") {
 						const payload = {
                             projectId: project.id,
 							title: projectTitle,
@@ -141,6 +142,10 @@ const TopBar = ({ show, toggle, page, project }) => {
 							<MdMenu size="1.5em" />
 						</div>
 					</div>
+					<div id="top-bar-project-icon-container">
+						<div id='top-bar-project-icon'>
+						<FaProjectDiagram size="1.6em"/></div>
+					</div>
 					<h1 id="top-bar-title-project">{projectTitle}</h1>
 					<div
 						id={
@@ -159,12 +164,12 @@ const TopBar = ({ show, toggle, page, project }) => {
 								>
 									<MdModeEdit /> <span>Edit project details</span>
 								</div>
-								<div
+								{/* <div
 									id="top-bar-project-detail-single-option"
 									style={{ borderBottom: "1px solid #ECEAE9" }}
 								>
 									<MdModeEdit /> <span>Set color & icon</span>
-								</div>
+								</div> */}
 								<div
 									id="top-bar-project-detail-single-option"
 									onClick={() => setShowDeleteModal(true)}

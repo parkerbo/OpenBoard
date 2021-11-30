@@ -102,3 +102,25 @@
     padding: 5px;
     height: 100%;
 }
+#homepage-user-projects{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 24px;
+}
+#project-item{
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    width: 30%;
+    max-width: 700px;
+    margin-bottom: 20px;
+}
+#project-item:hover{
+    background-color: #F9F8F8;
+    cursor:pointer;
+    border-radius: 5px;
+}
+
+#project-item h2{
+    font-size: 16px;
+}

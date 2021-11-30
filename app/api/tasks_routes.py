@@ -64,8 +64,9 @@ def updateTask(id):
     title, description,end_date,assignee,priority,status, projectId = itemgetter('title', 'description','end_date','assignee','priority','status', 'projectId')(request.json)
     try:
         project=Project.query.get(projectId)
-        user = User.query.get(assignee)
         task = Task.query.get(id)
+        if assignee != "null":
+            user = User.query.get(assignee)
         task.title = title
         task.description = description
         if end_date == 'null':
