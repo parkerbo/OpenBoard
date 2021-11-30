@@ -41,7 +41,7 @@ const TopBar = ({ show, toggle, page, project }) => {
 		const root = document.getElementsByClassName("openboard-root-page")[0];
 
 		if (root.scrollY > 0) {
-			console.log("here");
+			
 			setHeaderStyle("openboard-topbar-home-scroll");
 		} else {
 			setHeaderStyle("openboard-topbar-home");
