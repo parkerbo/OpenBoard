@@ -7,7 +7,7 @@ OpenBoard is a task management application oriented towards bug tracking for sof
 Checkout the [Wiki](https://github.com/parkerbo/OpenBoard/wiki) for more details!
 
 ### Openboard At a Glance
-
+![Alt Text](https://github.com/parkerbo/OpenBoard/blob/main/react-app/src/images/OpenBoard-Glance.gif)
 
 ## Technologies Used
 
