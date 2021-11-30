@@ -60,7 +60,7 @@ const HomePage = () => {
 					userId: user.id,
 					notepad: content,
 				};
-				console.log("here");
+			
 
 				await dispatch(saveNotepad(payload));
 				setSaveState("All changes saved");

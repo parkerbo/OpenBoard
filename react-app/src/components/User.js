@@ -10,14 +10,11 @@ function User() {
       return;
     }
     (async () => {
-      console.log("here")
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      console.log(user)
       setUser(user);
     })();
   }, [userId]);
-console.log(userId)
   if (!user) {
     return null;
   }

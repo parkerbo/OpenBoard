@@ -72,7 +72,7 @@ const ProjectPage = () => {
 			await dispatch(updateSection(newSectionId, newSection));
 			return;
 		}
-		console.log(source.index);
+
 		const start_tasks_order = Array.from(start.tasks_order);
 		start_tasks_order.splice(source.index, 1);
 		const newStartSection = {
@@ -97,7 +97,7 @@ const ProjectPage = () => {
 		const newSectionsState = {
 			...sections,
 		};
-		console.log(newSectionsState);
+		
 		setSections(newSectionsState);
 		await dispatch(updateSection(newStartSectionId, newStartSection));
 		await dispatch(

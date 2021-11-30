@@ -83,7 +83,7 @@ export const deleteProject = (projectId) => async (dispatch) => {
 
 // TASK THUNKS
 export const deleteTask = (sectionId, taskId) => async (dispatch) => {
-    console.log(sectionId)
+    
     const data = {
         'sectionId' : sectionId
     }
