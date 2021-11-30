@@ -29,7 +29,7 @@ const SideBar = ({ show, toggle }) => {
 						<MdHome size="1.5em" /> <span id="sidebar-link-text">Home</span>
 					</div>
 				</NavLink>
-				<NavLink to="/tasks" exact={true} activeClassName="sidebar-active">
+				{/* <NavLink to="/tasks" exact={true} activeClassName="sidebar-active">
 					<div id="sidebar-link">
 						<MdCheckCircleOutline size="1.5em" />{" "}
 						<span id="sidebar-link-text">My Tasks</span>
@@ -40,11 +40,11 @@ const SideBar = ({ show, toggle }) => {
 						<MdOutlineListAlt size="1.5em" />{" "}
 						<span id="sidebar-link-text">My Projects</span>
 					</div>
-				</NavLink>
+				</NavLink> */}
 			</div>
 			<div className="sidebar-projects-section">
 				<div id="sidebar-projects-title">
-					My Projects <NewProject />
+					My Projects <div id="add-project-button"> <NewProject /></div>
 				</div>
 				{user_projects
 					? Object.keys(user_projects).map((key) => (
