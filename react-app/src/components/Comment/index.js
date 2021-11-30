@@ -33,9 +33,10 @@ const Comment = ({ comment, currentUser, projectId, updateComments, lastComment 
 
 	const updateComment = async (commentId, newComment) => {
         const res = await dispatch(updateTaskComment(commentId, newComment));
+
         if (res){
             setOriginalComment(commentText);
-            await getProject(projectId);
+            await dispatch(getProject(projectId));
             setEditCommentForm(false);
         }
     };

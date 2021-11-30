@@ -3,13 +3,17 @@ import OpenBoardLogo from "../../images/OpenBoard-Logo.png";
 import sceneOne from "../../images/scene-1a.jpeg";
 import sceneTwo from "../../images/scene-1b.jpeg";
 import * as sessionActions from "../../store/session";
-import { useState, useEffect } from "react";
+import { BsLinkedin, BsGithub } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const Splash = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const aboutDiv = useRef();
+	const [showAbout, setShowAbout] = useState(false);
 	const [headerStyle, setHeaderStyle] = useState("splash-header-container");
 
 	const changeHeaderStyle = (event) => {
@@ -21,15 +25,32 @@ const Splash = () => {
 	};
 
 	useEffect(() => {
+		if (showAbout) {
+			document.addEventListener("mousedown", handleClick);
+			return () => {
+				document.removeEventListener("mousedown", handleClick);
+			};
+		}
+	}, [showAbout]);
+
+	const handleClick = (e) => {
+		if (aboutDiv.current.contains(e.target)) {
+			// inside click
+			return;
+		}
+		setShowAbout(false);
+		return;
+	};
+	useEffect(() => {
 		window.addEventListener("scroll", changeHeaderStyle);
 		return () => {
 			window.removeEventListener("scroll", changeHeaderStyle);
 		};
 	}, []);
 
-	const loginDemo = async() => {
+	const loginDemo = async () => {
 		await dispatch(sessionActions.login("demo@aa.io", "password"));
-	}
+	};
 
 	return (
 		<div class="splash-main">
@@ -40,9 +61,38 @@ const Splash = () => {
 							<img src={OpenBoardLogo} alt="OpenBoard" />
 						</div>
 						<ul id="splash-links-list">
-							<li>Why OpenBoard?</li>
-							<li>Features</li>
-							<li>Resources</li>
+							<div
+								id="about-link"
+								ref={aboutDiv}
+								onClick={(e) => {
+									setShowAbout(!showAbout);
+								}}
+							>
+								About
+								{showAbout ? (
+									<div id="about-me" onClick={(e) => e.stopPropagation()}>
+										<h2>Created by Parker Bolick</h2>
+										<div id="about-external-links">
+											<Link
+												to={{
+													pathname: "http://www.github.com/parkerbo",
+												}}
+												target="_blank"
+											>
+												<div style={{marginRight:10}}><BsGithub size="2em" /></div>
+											</Link>
+											<Link
+												to={{
+													pathname: "http://www.linkedin.com/in/parkerbolick/",
+												}}
+												target="_blank"
+											>
+												<div><BsLinkedin size="2em" /></div>
+											</Link>
+										</div>
+									</div>
+								) : null}
+							</div>
 						</ul>
 						<div class="splash-action-links">
 							<p id="splash-log-in" onClick={() => history.push("/login")}>
@@ -75,10 +125,7 @@ const Splash = () => {
 							>
 								Get Started
 							</button>
-							<button
-								id="splash-demo-bottom"
-								onClick={loginDemo}
-							>
+							<button id="splash-demo-bottom" onClick={loginDemo}>
 								Demo
 							</button>
 						</div>

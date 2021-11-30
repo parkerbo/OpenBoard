@@ -7,6 +7,7 @@ export const useTaskDetail = () => useContext(TaskDetailContext);
 export default function TaskDetailProvider({ children }) {
 	const [showTaskDetail, setShowTaskDetail] = useState(false);
     const [currentTask, setCurrentTask] = useState(false);
+	const [fromHome, setFromHome] = useState(false);
 
 	return (
 		<TaskDetailContext.Provider
@@ -14,7 +15,9 @@ export default function TaskDetailProvider({ children }) {
 				showTaskDetail,
 				setShowTaskDetail,
                 currentTask,
-                setCurrentTask
+                setCurrentTask,
+				fromHome,
+				setFromHome
 			}}
 		>
 			{children}
