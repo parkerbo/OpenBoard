@@ -61,8 +61,10 @@ def createTask():
 @tasks_routes.route('/<int:id>', methods=['POST'])
 @login_required
 def updateTask(id):
-    title, description,end_date,assignee,priority,status = itemgetter('title', 'description','end_date','assignee','priority','status')(request.json)
+    title, description,end_date,assignee,priority,status, projectId = itemgetter('title', 'description','end_date','assignee','priority','status', 'projectId')(request.json)
     try:
+        project=Project.query.get(projectId)
+        user = User.query.get(assignee)
         task = Task.query.get(id)
         task.title = title
         task.description = description
@@ -74,6 +76,7 @@ def updateTask(id):
             task.assignee_id = db.null()
         else:
             task.assignee_id = assignee
+            project.project_members.append(user)
         if priority == "---":
             task.priority = db.null()
         else:

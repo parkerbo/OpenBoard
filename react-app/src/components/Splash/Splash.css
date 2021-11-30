@@ -259,3 +259,54 @@
     animation-timing-function: ease;
     animation-name: slide;
 }
+
+#about-link{
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+	position: relative;
+}
+#about-link:hover{
+	cursor: pointer;
+}
+#about-me{
+	position: absolute;
+	padding: 6px 20px;
+	border-radius: 2px;
+	top:30px;
+	left:0;
+	width: 240px;
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+
+}
+#about-me h2{
+	color:black;
+	padding-bottom: 5px;
+	font-size: 16px;
+	border-bottom: 1px solid #ECEAE9;
+	margin:0;
+
+}
+#about-external-links{
+	padding-top: 10px;
+	display: flex;
+	justify-content: center;
+}
+#about-external-links a{
+	color: black;
+}
+#about-external-links a:hover{
+	color: #796DFE;
+}
+#about-external-links-side{
+	padding-top: 10px;
+	display: flex;
+	justify-content: center;
+}
+#about-external-links-side a{
+	color: white;
+}
+#about-external-links-side a:hover{
+	color: #796DFE;
+}

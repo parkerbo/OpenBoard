@@ -30,7 +30,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 	const assigneeInput = useRef();
 	const [saveState, setSaveState] = useState("");
 	const [searchQuery, setSearchQuery] = useState("");
-	const { setShowTaskDetail, setCurrentTask } = useTaskDetail();
+	const { setShowTaskDetail, setCurrentTask, } = useTaskDetail();
 	const [title, setTitle] = useState();
 	const [properDate, setProperDate] = useState();
 	const [showAssigneeDelete, setShowAssigneeDelete] = useState(false);
@@ -179,6 +179,7 @@ const TaskDetail = ({ show, task, projectId }) => {
 						assignee === "null" || assignee === null ? "null" : assignee.id,
 					priority: priority,
 					status: status,
+					projectId: projectId
 				};
 
 				const res = await dispatch(updateTask(task.id, payload));

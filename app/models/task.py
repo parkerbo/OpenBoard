@@ -20,8 +20,10 @@ class Task(db.Model):
     owner = db.relationship("User", backref='user', primaryjoin='Task.owner_id==User.id', lazy=True)
     assignee = db.relationship("User", backref='assignee', primaryjoin='Task.assignee_id==User.id', lazy=True)
     tasks = db.relationship("Section", backref='section_tasks', lazy=True)
+    section = db.relationship("Section", primaryjoin='Task.section_id==Section.id', lazy=True)
 
     def to_dict(self):
+        task_project = self.section.projects.to_task_dict()
         endDate = None
         if self.end_date:
             endDate = self.end_date.strftime("%b %-d '%y")
@@ -42,6 +44,7 @@ class Task(db.Model):
             'owner': self.owner.to_dict(),
             'assignee': assignee,
             'section_id': self.section_id,
+            'project': task_project,
             'status' : self.status,
             'priority' : self.priority,
             'end_date' : endDate,

@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LogoutButton from "../auth/LogoutButton";
+import { BsLinkedin, BsGithub } from "react-icons/bs";
 import NewProject from "./NewProject";
 import { MdMenuOpen } from "react-icons/md";
 import { FaSquare, FaPlus } from "react-icons/fa";
@@ -42,7 +43,9 @@ const SideBar = ({ show, toggle }) => {
 				</NavLink>
 			</div>
 			<div className="sidebar-projects-section">
-				<div id="sidebar-projects-title">My Projects <NewProject /></div>
+				<div id="sidebar-projects-title">
+					My Projects <NewProject />
+				</div>
 				{user_projects
 					? Object.keys(user_projects).map((key) => (
 							<NavLink
@@ -67,6 +70,29 @@ const SideBar = ({ show, toggle }) => {
 			</div>
 			<div className="sidebar-log-out">
 				<LogoutButton />
+			</div><div style={{textAlign:"center"}}>Created by Parker Bolick</div>
+			<div id="about-external-links-side">
+
+				<Link
+					to={{
+						pathname: "http://www.github.com/parkerbo",
+					}}
+					target="_blank"
+				>
+					<div style={{ marginRight: 10 }}>
+						<BsGithub size="2em" />
+					</div>
+				</Link>
+				<Link
+					to={{
+						pathname: "http://www.linkedin.com/in/parkerbolick/",
+					}}
+					target="_blank"
+				>
+					<div>
+						<BsLinkedin size="2em" />
+					</div>
+				</Link>
 			</div>
 		</nav>
 	);

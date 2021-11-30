@@ -42,3 +42,15 @@ class Project(db.Model):
             'created_at' : self.created_at,
             'updated_at' : self.updated_at
         }
+
+    def to_task_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'owner_id': self.owner_id,
+            'color' : self.color,
+            'icon' : self.icon,
+            'created_at' : self.created_at,
+            'updated_at' : self.updated_at
+        }

@@ -34,7 +34,7 @@
     font-family: "Montserrat-Regular";
     font-weight: 900;
 }
-#priority-task-title{
+#priority-task-item{
     display: flex;
     min-height: 30px;
     padding: 5px 0px;
@@ -43,4 +43,44 @@
 }
 .priorities-list{
     padding: 20px 20px;
+}
+#priority-task-title{
+    width: 70%;
+    max-width: 70%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#task-priority-project:hover{
+    cursor: pointer;
+}
+#task-priority-due-date{
+    display: flex;
+    padding-left: 5px;
+    text-overflow: ellipsis;
+    max-height: 20px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color:#AEABAC;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#task-priority-project {
+	border-radius: 10px;
+	display: block;
+	font-size: 12px;
+	font-weight: 400;
+	height: 20px;
+    width: 70px;
+	line-height: 20px;
+	overflow: hidden;
+    margin-right: 5px;
+	padding: 0 8px;
+	text-align: left;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+    background-color: #f06a6a;
+    color: black;
 }
