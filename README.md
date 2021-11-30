@@ -14,7 +14,9 @@ JavaScript | React | Redux
 Python | Flask | SQLAlchemy
 ### Packages
 [React Beautiful Drag and Drop](https://github.com/atlassian/react-beautiful-dnd)
+
 [React Textarea Autosize](https://www.npmjs.com/package/react-textarea-autosize)
+
 [React-Calendar](https://www.npmjs.com/package/react-calendar)
 
 ## Features
