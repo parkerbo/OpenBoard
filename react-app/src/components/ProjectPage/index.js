@@ -97,7 +97,6 @@ const ProjectPage = () => {
 		const newSectionsState = {
 			...sections,
 		};
-		
 		setSections(newSectionsState);
 		await dispatch(updateSection(newStartSectionId, newStartSection));
 		await dispatch(
