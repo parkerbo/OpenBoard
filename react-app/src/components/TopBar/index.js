@@ -6,7 +6,7 @@ import Modal from "../Modal";
 import { authenticate } from "../../store/session";
 import { useHistory } from "react-router";
 import {FaProjectDiagram} from 'react-icons/fa'
-import { saveProject, deleteProject} from "../../store/project";
+import { saveProject, deleteProject, getProject} from "../../store/project";
 
 
 const TopBar = ({ show, toggle, page, project }) => {
@@ -41,7 +41,7 @@ const TopBar = ({ show, toggle, page, project }) => {
 		const root = document.getElementsByClassName("openboard-root-page")[0];
 
 		if (root.scrollY > 0) {
-			
+
 			setHeaderStyle("openboard-topbar-home-scroll");
 		} else {
 			setHeaderStyle("openboard-topbar-home");
@@ -60,6 +60,7 @@ const TopBar = ({ show, toggle, page, project }) => {
 
 						await dispatch(saveProject(payload));
 						setSaveState("All changes saved");
+						await dispatch(authenticate());
 						setTimeout(() => {
 							setSaveState("");
 						}, 1000);
