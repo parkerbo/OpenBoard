@@ -41,6 +41,14 @@
     font-family: "Montserrat";
     border-bottom: 1px solid #ECEAE9;
 }
+#priority-task-item-completed{
+    display: flex;
+    opacity: 0.5;
+    min-height: 30px;
+    padding: 5px 0px;
+    font-family: "Montserrat";
+    border-bottom: 1px solid #ECEAE9;
+}
 .priorities-list{
     padding: 20px 20px;
 }
@@ -64,6 +72,19 @@
     align-items: center;
     font-size: 14px;
     color:#AEABAC;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#task-priority-overdue-date{
+    display: flex;
+    padding-left: 5px;
+    text-overflow: ellipsis;
+    max-height: 20px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color:#F06A6F;
     white-space: nowrap;
     overflow: hidden;
 }
