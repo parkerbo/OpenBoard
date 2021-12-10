@@ -3,28 +3,28 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../../store/session";
+import { IoIosAddCircle } from "react-icons/io";
 import Modal from "../Modal";
 import { createProject } from "../../store/project";
-const NewProject = () => {
-    const dispatch = useDispatch();
-    const history = useHistory();
+const NewProject = ({ location }) => {
+	const dispatch = useDispatch();
+	const history = useHistory();
 	const [showNewProjectModal, setShowNewProjectModal] = useState(false);
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const submitProject = async(e) => {
-        e.preventDefault();
-        const payload = {
-            'projectTitle': title,
-            'projectDescription' : description
-        }
-        const res = await dispatch(createProject(payload));
-        if (res){
-            setShowNewProjectModal(false);
-            await dispatch(authenticate());
-            return history.push(`/projects/${res.id}`);
-        }
-
-    }
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const submitProject = async (e) => {
+		e.preventDefault();
+		const payload = {
+			projectTitle: title,
+			projectDescription: description,
+		};
+		const res = await dispatch(createProject(payload));
+		if (res) {
+			setShowNewProjectModal(false);
+			await dispatch(authenticate());
+			return history.push(`/projects/${res.id}`);
+		}
+	};
 	return (
 		<>
 			<Modal
@@ -51,20 +51,35 @@ const NewProject = () => {
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
 						></textarea>
-					</div><div id="modal-button-container">
-					<button id="modal-button" type="submit">
-						Create
-					</button>
-				</div>
+					</div>
+					<div id="modal-button-container">
+						<button id="modal-button" type="submit">
+							Create
+						</button>
+					</div>
 				</form>
-
 			</Modal>
-			<div
-				id="sidebar-add-new-project-button"
-				onClick={() => setShowNewProjectModal(true)}
-			>
-				<FaPlus />
-			</div>
+			{location === "sidebar" ? (
+				<div
+					id="sidebar-add-new-project-button"
+					onClick={() => setShowNewProjectModal(true)}
+				>
+					<FaPlus />
+				</div>
+			) : (
+				<div
+					className="homepage-add-new-project"
+					id="project-item"
+					onClick={() => setShowNewProjectModal(true)}
+				>
+					<div id="top-bar-project-icon-container">
+						<div id="top-bar-project-icon">
+							<IoIosAddCircle size="1.6em" />
+						</div>
+					</div>
+					<h2>Add a new project</h2>
+				</div>
+			)}
 		</>
 	);
 };

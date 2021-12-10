@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import Priorities from "../Priorities";
 import { useHistory } from "react-router";
+import {IoIosAddCircle} from "react-icons/io"
 import { FaProjectDiagram } from "react-icons/fa";
 import { saveNotepad, getNotepad } from "../../store/session";
 import { MdLock } from "react-icons/md";
+import NewProject from "../SideBar/NewProject";
 
 const HomePage = () => {
 	const dispatch = useDispatch();
@@ -60,7 +62,7 @@ const HomePage = () => {
 					userId: user.id,
 					notepad: content,
 				};
-			
+
 
 				await dispatch(saveNotepad(payload));
 				setSaveState("All changes saved");
@@ -105,6 +107,9 @@ const HomePage = () => {
 							<div className="homepage-widget-content">
 								<h2 id="homepage-notepad-widget-title">Projects</h2>
 								<div id="homepage-user-projects">
+
+										<NewProject />
+
 									{projects
 										? Object.keys(projects).map((key) => (
 												<div
