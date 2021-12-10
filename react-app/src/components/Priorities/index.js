@@ -42,7 +42,7 @@ const Priorities = () => {
 								setCompleted(false);
 							}}
 						>
-							Overdue {overdueTasks.length?(overdueTasks.length):null}
+							Overdue {Object.keys(overdueTasks).length?`(${Object.keys(overdueTasks).length})`:null}
 						</div>
 						<div
 							id={
@@ -109,7 +109,10 @@ const Priorities = () => {
 						: null}
 					{completedTasks && completed
 						? Object.keys(completedTasks).map((key) => (
-								<div key={completedTasks[key].id} id="priority-task-item-completed">
+								<div
+									key={completedTasks[key].id}
+									id="priority-task-item-completed"
+								>
 									<div id="priority-task-title">
 										{completedTasks[key].title}
 									</div>
