@@ -8,7 +8,7 @@ import { MdMenuOpen } from "react-icons/md";
 import { FaSquare, FaPlus } from "react-icons/fa";
 import OpenBoardLogo from "../../images/OpenBoard-Logo-Dark.png";
 import "./SideBar.css";
-import { MdHome, MdCheckCircleOutline, MdOutlineListAlt } from "react-icons/md";
+import { MdHome} from "react-icons/md";
 
 const SideBar = ({ show, toggle }) => {
 	const user = useSelector((state) => state.session.user);
@@ -44,7 +44,7 @@ const SideBar = ({ show, toggle }) => {
 			</div>
 			<div className="sidebar-projects-section">
 				<div id="sidebar-projects-title">
-					My Projects <div id="add-project-button"> <NewProject /></div>
+					My Projects <div id="add-project-button"> <NewProject location="sidebar" /></div>
 				</div>
 				{user_projects
 					? Object.keys(user_projects).map((key) => (

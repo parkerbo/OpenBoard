@@ -39,6 +39,8 @@ const ProjectPage = () => {
 			}
 		}
 	}, [projectId]);
+
+
 	const onDragEnd = async (result) => {
 		const { destination, source, draggableId } = result;
 		if (!destination) {
@@ -107,6 +109,9 @@ const ProjectPage = () => {
 		}
 		return;
 	};
+
+
+	
 
 	return (
 		<div className="projectpage-main">
