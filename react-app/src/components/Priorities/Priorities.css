@@ -32,7 +32,7 @@
     color:black;
     border-bottom: 3px solid black;
     font-family: "Montserrat-Regular";
-    font-weight: 900;
+    font-weight: 900
 }
 #priority-task-item{
     display: flex;
